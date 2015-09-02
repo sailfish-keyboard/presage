@@ -179,8 +179,8 @@ Section "-Runtime" SecRuntime
   File "bin\libfreetype-6.dll"
   File "bin\libintl-8.dll"
 !else
-  File "bin\freetype6.dll"
-  File "bin\intl.dll"
+  File "bin\libfreetype-6.dll"
+  File "bin\libintl-8.dll"
 !endif
   File "bin\libbz2-1.dll"
   File "bin\libffi-6.dll"

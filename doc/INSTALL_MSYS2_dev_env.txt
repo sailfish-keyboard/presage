@@ -9,29 +9,35 @@ Close MSYS2, run it again from Start menu and update the rest with:
   pacman -Su
 
 Install required dependencies:
+
+  # 64-bit x86_64
   pacman -S \
+    make autoconf automake libtool tar \
     mingw-w64-x86_64-gcc mingw-w64-x86_64-gdb \
     mingw-w64-x86_64-sqlite3 libsqlite-devel \
     mingw-w64-x86_64-pkg-config \
-    make 
+    mingw-w64-x86_64-cppunit \
+    mingw-w64-i686-ncurses ncurses-devel \
+    mingw-w64-x86_64-gtk2 gnome-common \
+    mingw-w64-x86_64-swig \
+    mingw-w64-x86_64-python2 \
+    mingw-w64-x86_64-wxPython \
+    mingw-w64-x86_64-qt5 mingw-w64-x86_64-qscintilla \
+    git
 
-  mingw-w64-x86_64-cppunit
 
-  # curses did not work
-  mingw-w64-i686-ncurses ncurses-devel
+  # 32-bit i686
+  pacman -S \
+    make autoconf automake libtool tar \
+    mingw-w64-i686-gcc mingw-w64-i686-gdb \
+    mingw-w64-i686-sqlite3 libsqlite-devel \
+    mingw-w64-i686-pkg-config \
+    mingw-w64-i686-cppunit \
+    mingw-w64-i686-ncurses ncurses-devel \
+    mingw-w64-i686-gtk2 gnome-common \
+    mingw-w64-i686-swig \
+    mingw-w64-i686-python2 \
+    mingw-w64-i686-wxPython \
+    mingw-w64-i686-qt5 mingw-w64-i686-qscintilla \
+    git
 
-  mingw-w64-x86_64-gtk2
-
-  mingw-w64-x86_64-python2 mingw-w64-x86_64-swig
-  
-  mingw-w64-x86_64-wxPython
-
-  mingw-w64-x86_64-qt4 mingw-w64-x86_64-qscintilla
-
-  autoconf automake libtool
-  gnome-common
-
-  git
-
-  tar
-  

@@ -120,8 +120,8 @@ function install_dependants()
         GTK_FREETYPE_LIB="libfreetype-6.dll"
 	GTK_INTL_LIB="libintl-8.dll"
     else
-        GTK_FREETYPE_LIB="freetype6.dll"
-	GTK_INTL_LIB="intl.dll"
+        GTK_FREETYPE_LIB="libfreetype-6.dll"
+	GTK_INTL_LIB="libintl-8.dll"
     fi
     GTK_DEPS="libcairo-2.dll libgdk-win32-2.0-0.dll libgdk_pixbuf-2.0-0.dll libglib-2.0-0.dll libgmodule-2.0-0.dll libgobject-2.0-0.dll libgtk-win32-2.0-0.dll libpango-1.0-0.dll libpangocairo-1.0-0.dll libfontconfig-1.dll libexpat-1.dll libpng16-16.dll libgio-2.0-0.dll libatk-1.0-0.dll libgthread-2.0-0.dll libpangoft2-1.0-0.dll libpangowin32-1.0-0.dll zlib1.dll ${GTK_FREETYPE_LIB} ${GTK_INTL_LIB} libbz2-1.dll libffi-6.dll libharfbuzz-0.dll libiconv-2.dll libpixman-1-0.dll"
     QT_DEPS="Qt5Core.dll Qt5Gui.dll Qt5Widgets.dll Qt5PrintSupport.dll libicuin55.dll libicuuc55.dll libicudt55.dll libpcre16-0.dll libpng16-16.dll qscintilla2.dll"

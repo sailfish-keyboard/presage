@@ -1,3 +1,15 @@
+2015-09-02  Matteo Vescovi  <matteo(dot)vescovi(at)yahoo(dot)co(dot)uk>
+
+	* doc/INSTALL_MSYS2_dev_env.txt: update info on how to setup MSYS2
+	developer environment. MSYS2 is now the preferred Windows dev env.
+
+	* packaging/windows/presage_installer.nsi
+	packaging/windows/win-buildpackage.sh: update packaging for the
+	MSYS2 Windows dev env.
+
+	* bindings/csharp/deploy.cmd: added script to ease Windows
+	building and packaging.
+
 2015-05-02  Matteo Vescovi  <matteo(dot)vescovi(at)yahoo(dot)co(dot)uk>
 
 	* doc/INSTALL_MSYS2_dev_env.txt,
