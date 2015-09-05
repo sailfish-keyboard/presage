@@ -56,6 +56,7 @@ public:
 
     void testMaxPartialPredictionSize();
 
+    void testCountThreshold();
 
 private:
     Configuration* prepareConfiguration(const char* config[]) const;
@@ -87,6 +88,7 @@ private:
     CPPUNIT_TEST( testBigramTrigramWeight       );
     CPPUNIT_TEST( testUnigramBigramTrigramWeight);
     CPPUNIT_TEST( testMaxPartialPredictionSize  );
+    CPPUNIT_TEST( testCountThreshold            );
     CPPUNIT_TEST_SUITE_END();
 };
 

@@ -121,28 +121,12 @@ int DatabaseConnector::getNgramCount(const Ngram ngram) const
     return extractFirstInteger(result);
 }
 
-NgramTable DatabaseConnector::getNgramLikeTable(const Ngram ngram, int limit) const
+NgramTable DatabaseConnector::getNgramLikeTable(const Ngram ngram, const char** filter, const int count_threshold, int limit) const
 {
     std::stringstream query;
     query << "SELECT " << buildSelectLikeClause(ngram.size()) << " "
           << "FROM _" << ngram.size() << "_gram"
-          << buildWhereLikeClause(ngram)
-          << " ORDER BY count DESC";
-    if (limit < 0) {
-        query << ";";
-    } else {
-        query << " LIMIT " << limit << ';';
-    }
-
-    return executeSql(query.str());
-}
-
-NgramTable DatabaseConnector::getNgramLikeTableFiltered(const Ngram ngram, const char** filter, int limit) const
-{
-    std::stringstream query;
-    query << "SELECT " << buildSelectLikeClause(ngram.size()) << " "
-          << "FROM _" << ngram.size() << "_gram"
-          << buildWhereLikeClauseFiltered(ngram,filter)
+          << buildWhereLikeClause(ngram, filter, count_threshold)
           << " ORDER BY count DESC";
     if (limit < 0) {
         query << ";";
@@ -214,24 +198,9 @@ std::string DatabaseConnector::buildWhereClause(const Ngram ngram) const
     return where_clause.str();
 }
 
-// TODO REVISIT refactor: this is same as buildWhereClause, except for
-//                        "word = " instead of "word LIKE "
-std::string DatabaseConnector::buildWhereLikeClause(const Ngram ngram) const
-{
-    std::stringstream where_clause;
-    where_clause << " WHERE";
-    for (size_t i = 0; i < ngram.size(); i++) {
-        if (i < ngram.size() - 1) {
-            where_clause << " word_" << ngram.size() - i - 1 << " = '"
-                         << sanitizeString(ngram[i]) << "' AND";
-        } else {
-            where_clause << " word LIKE '" << sanitizeString(ngram[ngram.size() - 1]) << "%'";
-        }
-    }
-    return where_clause.str();
-}
-
-std::string DatabaseConnector::buildWhereLikeClauseFiltered(const Ngram ngram, const char** filter) const
+std::string DatabaseConnector::buildWhereLikeClause(const Ngram ngram,
+						    const char** filter,
+						    const int count_threshold) const
 {
     std::stringstream where_clause;
     where_clause << " WHERE";
@@ -246,15 +215,16 @@ std::string DatabaseConnector::buildWhereLikeClauseFiltered(const Ngram ngram, c
                 std::string true_prefix = sanitizeString(ngram[ngram.size() - 1]);
                 where_clause << " (";
                 for (int j = 0; filter[j] != 0; j++) {
-//                for(size_t j=0; j < filter.size()-1; j++)
                     if (j) {
                         where_clause << " OR ";
                     }
                     where_clause << " word LIKE '" << true_prefix << filter[j] << "%'";
                 }
-//                where_clause << " word LIKE '" << true_prefix <<"%' )";
                 where_clause << ')';
             }
+	    if (count_threshold > 0) {
+		where_clause << " AND count >= " << count_threshold;
+	    }
         }
     }
     return where_clause.str();

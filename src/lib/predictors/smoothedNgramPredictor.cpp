@@ -35,14 +35,16 @@ SmoothedNgramPredictor::SmoothedNgramPredictor(Configuration* config, ContextTra
 		"SmoothedNgramPredictor, a linear interpolating n-gram predictor",
 		"SmoothedNgramPredictor, long description." ),
       db (0),
+      count_threshold (0),
       cardinality (0),
       learn_mode_set (false),
       dispatcher (this)
 {
-    LOGGER     = PREDICTORS + name + ".LOGGER";
-    DBFILENAME = PREDICTORS + name + ".DBFILENAME";
-    DELTAS     = PREDICTORS + name + ".DELTAS";
-    LEARN      = PREDICTORS + name + ".LEARN";
+    LOGGER          = PREDICTORS + name + ".LOGGER";
+    DBFILENAME      = PREDICTORS + name + ".DBFILENAME";
+    DELTAS          = PREDICTORS + name + ".DELTAS";
+    COUNT_THRESHOLD = PREDICTORS + name + ".COUNT_THRESHOLD";
+    LEARN           = PREDICTORS + name + ".LEARN";
     DATABASE_LOGGER = PREDICTORS + name + ".DatabaseConnector.LOGGER";
 
     // build notification dispatch map
@@ -50,6 +52,7 @@ SmoothedNgramPredictor::SmoothedNgramPredictor(Configuration* config, ContextTra
     dispatcher.map (config->find (DATABASE_LOGGER), & SmoothedNgramPredictor::set_database_logger_level);
     dispatcher.map (config->find (DBFILENAME), & SmoothedNgramPredictor::set_dbfilename);
     dispatcher.map (config->find (DELTAS), & SmoothedNgramPredictor::set_deltas);
+    dispatcher.map (config->find (COUNT_THRESHOLD), & SmoothedNgramPredictor::set_count_threshold);
     dispatcher.map (config->find (LEARN), & SmoothedNgramPredictor::set_learn);
 }
 
@@ -90,6 +93,13 @@ void SmoothedNgramPredictor::set_deltas (const std::string& value)
     logger << INFO << "CARDINALITY: " << cardinality << endl;
 
     init_database_connector_if_ready ();
+}
+
+
+void SmoothedNgramPredictor::set_count_threshold (const std::string& value)
+{
+    count_threshold = Utility::toInt (value);
+    logger << INFO << "COUNT_THRESHOLD: " << count_threshold << endl;
 }
 
 
@@ -237,11 +247,10 @@ Prediction SmoothedNgramPredictor::predict(const size_t max_partial_prediction_s
 
         NgramTable partial;
 
-        if (filter == 0) {
-	    partial = db->getNgramLikeTable(prefix_ngram,max_partial_prediction_size - prefixCompletionCandidates.size());
-	} else {
-	    partial = db->getNgramLikeTableFiltered(prefix_ngram,filter, max_partial_prediction_size - prefixCompletionCandidates.size());
-	}
+	partial = db->getNgramLikeTable(prefix_ngram,
+					filter,
+					count_threshold,
+					max_partial_prediction_size - prefixCompletionCandidates.size());
 
         db->endTransaction();
 

@@ -59,6 +59,7 @@ private:
     std::string LOGGER;
     std::string DBFILENAME;
     std::string DELTAS;
+    std::string COUNT_THRESHOLD;
     std::string LEARN;
     std::string DATABASE_LOGGER;
 
@@ -67,6 +68,7 @@ private:
 
     void set_dbfilename (const std::string& filename);
     void set_deltas (const std::string& deltas);
+    void set_count_threshold (const std::string& value);
     void set_database_logger_level (const std::string& level);
     void set_learn (const std::string& learn_mode);
 
@@ -76,6 +78,7 @@ private:
     std::string         dbfilename;
     std::string         dbloglevel;
     std::vector<double> deltas;
+    int                 count_threshold;
     size_t              cardinality; // cardinality == what is the n in n-gram?
     bool                learn_mode;
     bool                learn_mode_set;

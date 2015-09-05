@@ -1,3 +1,21 @@
+2015-09-05  Matteo Vescovi  <matteo(dot)vescovi(at)yahoo(dot)co(dot)uk>
+
+	* resources/profiles/presage.xml.template
+	src/lib/core/defaultProfile.cpp
+	src/lib/predictors/dbconnector/databaseConnector.cpp
+	src/lib/predictors/dbconnector/databaseConnector.h
+	src/lib/predictors/smoothedNgramPredictor.cpp
+	src/lib/predictors/smoothedNgramPredictor.h
+	test/lib/predictors/dbconnector/databaseConnectorTest.cpp
+	test/lib/predictors/dbconnector/databaseConnectorTest.h
+	test/lib/predictors/dbconnector/sqliteDatabaseConnectorTest.cpp
+	test/lib/predictors/newSmoothedNgramPredictorTest.cpp
+	test/lib/predictors/smoothedNgramPredictorTest.cpp
+	test/lib/predictors/smoothedNgramPredictorTest.h: add
+	COUNT_THRESHOLD configuration variable to smoothed n-gram
+	predictor to select suggestions that have a count greater than or
+	equal the value specified.
+
 2015-09-02  Matteo Vescovi  <matteo(dot)vescovi(at)yahoo(dot)co(dot)uk>
 
 	* doc/INSTALL_MSYS2_dev_env.txt: update info on how to setup MSYS2

@@ -305,7 +305,7 @@ void SqliteDatabaseConnectorTest::testGetNgramLikeTable()
     ngram->push_back("foo");
     ngram->push_back("1337");
     expected_uni->push_back(*ngram);
-    actual = sqliteDatabaseConnector->getNgramLikeTable(*unigram);
+    actual = sqliteDatabaseConnector->getNgramLikeTable(*unigram, 0, 0);
     assertEqualNgramTable(expected_uni, actual);
     delete ngram;
 
@@ -315,7 +315,7 @@ void SqliteDatabaseConnectorTest::testGetNgramLikeTable()
     ngram->push_back("bar");
     ngram->push_back("1337");
     expected_bi->push_back(*ngram);
-    actual = sqliteDatabaseConnector->getNgramLikeTable(*bigram);
+    actual = sqliteDatabaseConnector->getNgramLikeTable(*bigram, 0, 0);
     assertEqualNgramTable(expected_bi, actual);
     delete ngram;
 
@@ -326,7 +326,7 @@ void SqliteDatabaseConnectorTest::testGetNgramLikeTable()
     ngram->push_back("foobar");
     ngram->push_back("1337");
     expected_tri->push_back(*ngram);
-    actual = sqliteDatabaseConnector->getNgramLikeTable(*trigram);
+    actual = sqliteDatabaseConnector->getNgramLikeTable(*trigram, 0, 0);
     assertEqualNgramTable(expected_tri, actual);
     delete ngram;
 
@@ -339,7 +339,7 @@ void SqliteDatabaseConnectorTest::testGetNgramLikeTable()
     ngram->push_back("foo1");
     ngram->push_back("1336");
     expected_uni->push_back(*ngram);
-    actual = sqliteDatabaseConnector->getNgramLikeTable(*unigram);
+    actual = sqliteDatabaseConnector->getNgramLikeTable(*unigram, 0, 0);
     assertEqualNgramTable(expected_uni, actual);
     delete ngram;
 
@@ -348,7 +348,7 @@ void SqliteDatabaseConnectorTest::testGetNgramLikeTable()
     ngram->push_back("bar1");
     ngram->push_back("1336");
     expected_bi->push_back(*ngram);
-    actual = sqliteDatabaseConnector->getNgramLikeTable(*bigram);
+    actual = sqliteDatabaseConnector->getNgramLikeTable(*bigram, 0, 0);
     assertEqualNgramTable(expected_bi, actual);
     delete ngram;
 
@@ -358,7 +358,7 @@ void SqliteDatabaseConnectorTest::testGetNgramLikeTable()
     ngram->push_back("foobar1");
     ngram->push_back("1336");
     expected_tri->push_back(*ngram);
-    actual = sqliteDatabaseConnector->getNgramLikeTable(*trigram);
+    actual = sqliteDatabaseConnector->getNgramLikeTable(*trigram, 0, 0);
     assertEqualNgramTable(expected_tri, actual);
     delete ngram;
 

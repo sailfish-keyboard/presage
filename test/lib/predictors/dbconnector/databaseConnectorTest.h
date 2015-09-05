@@ -33,7 +33,6 @@
 #include <sstream>
 
 const int GLOBAL_MAGIC_NUMBER = 1337;
-//DatabaseConnectorTest::DatabaseConnectorImpl::MAGIC_NUMBER = GLOBAL_MAGIC_NUMBER;
 
 class DatabaseConnectorTest : public CppUnit::TestFixture { 
 public:
@@ -44,6 +43,7 @@ public:
     void testCreateNgramTable();
     void testGetNgramCount();
     void testGetNgramLikeTable();
+    void testGetNgramLikeTableCountThreshold();
     void testGetNgramLikeTableLimit();
     void testInsertNgram();
     void testUpdateNgram();
@@ -161,15 +161,16 @@ private:
     Ngram* bigram;
     Ngram* trigram;
 
-    CPPUNIT_TEST_SUITE( DatabaseConnectorTest );
-//    CPPUNIT_TEST( testSanitizeString          );
-    CPPUNIT_TEST( testCreateNgramTable        );
-    CPPUNIT_TEST( testGetNgramCount           );
-    CPPUNIT_TEST( testGetNgramLikeTable       );
-    CPPUNIT_TEST( testGetNgramLikeTableLimit  );
-    CPPUNIT_TEST( testInsertNgram             );
-    CPPUNIT_TEST( testUpdateNgram             );
-    CPPUNIT_TEST( testRemoveNgram             );
+    CPPUNIT_TEST_SUITE(DatabaseConnectorTest);
+//    CPPUNIT_TEST(testSanitizeString);
+    CPPUNIT_TEST(testCreateNgramTable);
+    CPPUNIT_TEST(testGetNgramCount);
+    CPPUNIT_TEST(testGetNgramLikeTable);
+    CPPUNIT_TEST(testGetNgramLikeTableCountThreshold);
+    CPPUNIT_TEST(testGetNgramLikeTableLimit);
+    CPPUNIT_TEST(testInsertNgram);
+    CPPUNIT_TEST(testUpdateNgram);
+    CPPUNIT_TEST(testRemoveNgram);
     CPPUNIT_TEST_SUITE_END();
 };
 

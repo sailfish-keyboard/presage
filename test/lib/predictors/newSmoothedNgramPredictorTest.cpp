@@ -61,6 +61,7 @@ void NewSmoothedNgramPredictorTest::setUp()
     config->insert ("Presage.Predictors.SmoothedNgramPredictor.PREDICTOR", "SmoothedNgramPredictor");
     config->insert ("Presage.Predictors.SmoothedNgramPredictor.LOGGER", "ERROR");
     config->insert ("Presage.Predictors.SmoothedNgramPredictor.DELTAS", "0.001 0.01 0.889");
+    config->insert ("Presage.Predictors.SmoothedNgramPredictor.COUNT_THRESHOLD", "0");
     config->insert ("Presage.Predictors.SmoothedNgramPredictor.DBFILENAME", DATABASE);
     config->insert ("Presage.Predictors.SmoothedNgramPredictor.LEARN", "true");
     config->insert ("Presage.Predictors.SmoothedNgramPredictor.DatabaseConnector.LOGGER", "ERROR");

@@ -105,16 +105,37 @@ void DatabaseConnectorTest::testGetNgramLikeTable()
     std::string* lastLikeQuery = new std::string();
     DatabaseConnectorLikeImpl* databaseConnectorLike = new DatabaseConnectorLikeImpl(lastLikeQuery);
 
-    assertCorrectMockNgramTable(databaseConnectorLike->getNgramLikeTable(*unigram));
+    assertCorrectMockNgramTable(databaseConnectorLike->getNgramLikeTable(*unigram, 0, 0));
     CPPUNIT_ASSERT_EQUAL( static_cast<std::string>("SELECT word, count FROM _1_gram WHERE word LIKE 'foo%' ORDER BY count DESC;"),
 			  *lastLikeQuery );
 
-    databaseConnectorLike->getNgramLikeTable(*bigram);
+    databaseConnectorLike->getNgramLikeTable(*bigram, 0, 0);
     CPPUNIT_ASSERT_EQUAL( static_cast<std::string>("SELECT word_1, word, count FROM _2_gram WHERE word_1 = 'foo' AND word LIKE 'bar%' ORDER BY count DESC;"),
 			  *lastLikeQuery );
 
-    databaseConnectorLike->getNgramLikeTable(*trigram);
+    databaseConnectorLike->getNgramLikeTable(*trigram, 0, 0);
     CPPUNIT_ASSERT_EQUAL( static_cast<std::string>("SELECT word_2, word_1, word, count FROM _3_gram WHERE word_2 = 'foo' AND word_1 = 'bar' AND word LIKE 'foobar%' ORDER BY count DESC;"),
+			  *lastLikeQuery );
+
+    delete lastLikeQuery;
+    delete databaseConnectorLike;
+}
+
+void DatabaseConnectorTest::testGetNgramLikeTableCountThreshold()
+{
+    std::string* lastLikeQuery = new std::string();
+    DatabaseConnectorLikeImpl* databaseConnectorLike = new DatabaseConnectorLikeImpl(lastLikeQuery);
+
+    assertCorrectMockNgramTable(databaseConnectorLike->getNgramLikeTable(*unigram, 0, GLOBAL_MAGIC_NUMBER));
+    CPPUNIT_ASSERT_EQUAL( static_cast<std::string>("SELECT word, count FROM _1_gram WHERE word LIKE 'foo%' AND count >= 1337 ORDER BY count DESC;"),
+			  *lastLikeQuery );
+
+    databaseConnectorLike->getNgramLikeTable(*bigram, 0, GLOBAL_MAGIC_NUMBER);
+    CPPUNIT_ASSERT_EQUAL( static_cast<std::string>("SELECT word_1, word, count FROM _2_gram WHERE word_1 = 'foo' AND word LIKE 'bar%' AND count >= 1337 ORDER BY count DESC;"),
+			  *lastLikeQuery );
+
+    databaseConnectorLike->getNgramLikeTable(*trigram, 0, GLOBAL_MAGIC_NUMBER);
+    CPPUNIT_ASSERT_EQUAL( static_cast<std::string>("SELECT word_2, word_1, word, count FROM _3_gram WHERE word_2 = 'foo' AND word_1 = 'bar' AND word LIKE 'foobar%' AND count >= 1337 ORDER BY count DESC;"),
 			  *lastLikeQuery );
 
     delete lastLikeQuery;
@@ -126,15 +147,15 @@ void DatabaseConnectorTest::testGetNgramLikeTableLimit()
     std::string* lastLikeQuery = new std::string();
     DatabaseConnectorLikeImpl* databaseConnectorLike = new DatabaseConnectorLikeImpl(lastLikeQuery);
 
-    assertCorrectMockNgramTable(databaseConnectorLike->getNgramLikeTable(*unigram, GLOBAL_MAGIC_NUMBER));
+    assertCorrectMockNgramTable(databaseConnectorLike->getNgramLikeTable(*unigram, 0, 0, GLOBAL_MAGIC_NUMBER));
     CPPUNIT_ASSERT_EQUAL( static_cast<std::string>("SELECT word, count FROM _1_gram WHERE word LIKE 'foo%' ORDER BY count DESC LIMIT 1337;"),
 			  *lastLikeQuery );
 
-    databaseConnectorLike->getNgramLikeTable(*bigram, GLOBAL_MAGIC_NUMBER);
+    databaseConnectorLike->getNgramLikeTable(*bigram, 0, 0, GLOBAL_MAGIC_NUMBER);
     CPPUNIT_ASSERT_EQUAL( static_cast<std::string>("SELECT word_1, word, count FROM _2_gram WHERE word_1 = 'foo' AND word LIKE 'bar%' ORDER BY count DESC LIMIT 1337;"),
 			  *lastLikeQuery );
 
-    databaseConnectorLike->getNgramLikeTable(*trigram, GLOBAL_MAGIC_NUMBER);
+    databaseConnectorLike->getNgramLikeTable(*trigram, 0, 0, GLOBAL_MAGIC_NUMBER);
     CPPUNIT_ASSERT_EQUAL( static_cast<std::string>("SELECT word_2, word_1, word, count FROM _3_gram WHERE word_2 = 'foo' AND word_1 = 'bar' AND word LIKE 'foobar%' ORDER BY count DESC LIMIT 1337;"),
 			  *lastLikeQuery );
 

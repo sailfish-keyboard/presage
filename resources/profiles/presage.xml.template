@@ -83,6 +83,7 @@
 		 Deltas also control the value of n in the n-gram model.
 	    -->
             <DELTAS>0.01 0.1 0.89</DELTAS>
+            <COUNT_THRESHOLD>0</COUNT_THRESHOLD>
             <LEARN>false</LEARN>
             <DatabaseConnector>
                 <LOGGER>ERROR</LOGGER>
@@ -100,6 +101,7 @@
 		 Deltas also control the value of n in the n-gram model.
 	    -->
             <DELTAS>0.01 0.1 0.89</DELTAS>
+            <COUNT_THRESHOLD>0</COUNT_THRESHOLD>
             <LEARN>true</LEARN>
             <DatabaseConnector>
                 <LOGGER>ERROR</LOGGER>

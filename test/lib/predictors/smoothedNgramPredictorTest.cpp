@@ -140,7 +140,8 @@ Configuration* SmoothedNgramPredictorTest::prepareConfiguration(const char* conf
     configuration->insert ("Presage.Predictors.TestSmoothedNgramPredictor.PREDICTOR", "TestSmoothedNgramPredictor");
     configuration->insert ("Presage.Predictors.TestSmoothedNgramPredictor.LOGGER", "ERROR");
     configuration->insert ("Presage.Predictors.TestSmoothedNgramPredictor.DELTAS", config[0]);
-    configuration->insert ("Presage.Predictors.TestSmoothedNgramPredictor.DBFILENAME", config[1]);
+    configuration->insert ("Presage.Predictors.TestSmoothedNgramPredictor.COUNT_THRESHOLD", config[1]);
+    configuration->insert ("Presage.Predictors.TestSmoothedNgramPredictor.DBFILENAME", config[2]);
     configuration->insert ("Presage.Predictors.TestSmoothedNgramPredictor.DatabaseConnector.LOGGER", "ERROR");
     configuration->insert ("Presage.Predictors.TestSmoothedNgramPredictor.LEARN", "FALSE");
     
@@ -169,7 +170,7 @@ Predictor* SmoothedNgramPredictorTest::createPredictor(Configuration* config,
 
 void SmoothedNgramPredictorTest::testUnigramWeight()
 {
-    const char* config[] = { "1.0 0.0 0.0", DATABASE.c_str() };
+    const char* config[] = { "1.0 0.0 0.0", "0", DATABASE.c_str() };
 
     {
 	const char* history[] = { "foo", "bar", "" };
@@ -217,7 +218,7 @@ void SmoothedNgramPredictorTest::testUnigramWeight()
 
 void SmoothedNgramPredictorTest::testBigramWeight()
 {
-    const char* config[] = { "0.0 1.0 0.0", DATABASE.c_str() };
+    const char* config[] = { "0.0 1.0 0.0", "0", DATABASE.c_str() };
 
     {
 	const char* history[] = { "foo", "bar", "" };
@@ -265,7 +266,7 @@ void SmoothedNgramPredictorTest::testBigramWeight()
 
 void SmoothedNgramPredictorTest::testTrigramWeight()
 {
-    const char* config[] = { "0.0 0.0 1.0", DATABASE.c_str() };
+    const char* config[] = { "0.0 0.0 1.0", "0", DATABASE.c_str() };
 
     {
 	const char* history[] = { "foo", "bar", "" };
@@ -306,7 +307,7 @@ void SmoothedNgramPredictorTest::testTrigramWeight()
 
 void SmoothedNgramPredictorTest::testUnigramBigramWeight()
 {
-    const char* config[] = { "0.0001 0.9999 0.0", DATABASE.c_str() };
+    const char* config[] = { "0.0001 0.9999 0.0", "0", DATABASE.c_str() };
 
     // unigram weight is much lower han bigram weight in order to
     // ensure that results are not masked by unigram results.
@@ -336,7 +337,7 @@ void SmoothedNgramPredictorTest::testUnigramBigramWeight()
 
 void SmoothedNgramPredictorTest::testUnigramTrigramWeight()
 {
-    const char* config[] = { "0.0001 0.0 0.9999", DATABASE.c_str() };
+    const char* config[] = { "0.0001 0.0 0.9999", "0", DATABASE.c_str() };
 
     // unigram weight is much lower han trigram weight in order to
     // ensure that results are not masked by unigram results.
@@ -366,7 +367,7 @@ void SmoothedNgramPredictorTest::testUnigramTrigramWeight()
 
 void SmoothedNgramPredictorTest::testBigramTrigramWeight()
 {
-    const char* config[] = { "0.0 0.0001 0.9999", DATABASE.c_str() };
+    const char* config[] = { "0.0 0.0001 0.9999", "0", DATABASE.c_str() };
 
     // unigram weight is much lower han trigram weight in order to
     // ensure that results are not masked by unigram results.
@@ -396,7 +397,7 @@ void SmoothedNgramPredictorTest::testBigramTrigramWeight()
 
 void SmoothedNgramPredictorTest::testUnigramBigramTrigramWeight()
 {
-    const char* config[] = { "0.000001 0.001 0.998999", DATABASE.c_str() };
+    const char* config[] = { "0.000001 0.001 0.998999", "0", DATABASE.c_str() };
 
     // unigram weight is much lower han trigram weight in order to
     // ensure that results are not masked by unigram results.
@@ -433,10 +434,59 @@ void SmoothedNgramPredictorTest::testMaxPartialPredictionSize()
 
 	// assign equal weight to uni/bi/tri-grams; only vary maximum
 	// partial prediction size.
-	const char* config[] = { "0.33 0.33 0.33", DATABASE.c_str() };
+	const char* config[] = { "0.33 0.33 0.33", "0", DATABASE.c_str() };
 	const char* history[] = { "", "", "" };
 	
 	Prediction prediction = runPredict(config, history, size);
 	CPPUNIT_ASSERT_EQUAL(size, prediction.size());
+    }
+}
+
+
+void SmoothedNgramPredictorTest::testCountThreshold()
+{
+    {
+	const char* config[] = { "0.000001 0.001 0.998999", "1000000000", DATABASE.c_str() };
+	const char* history[] = { "foo", "bar", "" };
+	unsigned int expected_prediction_size = 0;
+	const std::string expected_prediction_words[] = { };
+
+	assertCorrectPrediction(config, history, expected_prediction_size, expected_prediction_words);
+    }
+
+    {
+	const char* config[] = { "0.000001 0.001 0.998999", "100000000", DATABASE.c_str() };
+	const char* history[] = { "foo", "bar", "" };
+	unsigned int expected_prediction_size = 1;
+	const std::string expected_prediction_words[] = { FOO };
+
+	assertCorrectPrediction(config, history, expected_prediction_size, expected_prediction_words);
+    }
+
+    {
+	const char* config[] = { "0.000001 0.001 0.998999", "10000000", DATABASE.c_str() };
+	const char* history[] = { "foo", "bar", "" };
+	unsigned int expected_prediction_size = 2;
+	const std::string expected_prediction_words[] = { FOO, BAR };
+
+	assertCorrectPrediction(config, history, expected_prediction_size, expected_prediction_words);
+    }
+
+    {
+	const char* config[] = { "0.000001 0.001 0.998999", "1000000", DATABASE.c_str() };
+	const char* history[] = { "foo", "bar", "" };
+	unsigned int expected_prediction_size = 3;
+	const std::string expected_prediction_words[] = { FOOBAR, FOO, BAR };
+
+	assertCorrectPrediction(config, history, expected_prediction_size, expected_prediction_words);
+    }
+
+    {
+	const char* config[] = { "0.000001 0.001 0.998999", "1", DATABASE.c_str() };
+	const char* history[] = { "foo", "bar", "" };
+	unsigned int expected_prediction_size = 3;
+	const std::string expected_prediction_words[] = { FOOBAR, FOO, BAR };
+
+	assertCorrectPrediction(config, history, expected_prediction_size, expected_prediction_words);
     }
 }

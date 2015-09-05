@@ -67,13 +67,13 @@ public:
      */
     int getNgramCount(const Ngram ngram) const;
 
-    /** Returns a table of ngrams matching the specified ngram-like query.
+    /** Returns a table of ngrams matching the specified ngram-like
+     ** query, satisfying the given filter and count threshold.
      */
-    NgramTable getNgramLikeTable(const Ngram ngram, int limit = -1) const;
-
-    /** Returns a table of ngrams matching the specified ngram-like query and satisfying the given filter.
-     */
-    NgramTable getNgramLikeTableFiltered(const Ngram ngram, const char** filter, int limit = -1) const;
+    NgramTable getNgramLikeTable(const Ngram ngram,
+				 const char** filter,
+				 const int count_threshold,
+				 int limit = -1) const;
 
     /** Increments the specified ngram count and returns the updated count.
      *
@@ -136,14 +136,14 @@ private:
      */
     std::string buildWhereClause(const Ngram ngram) const;
 
-    /** Returns a string containing an SQL WHERE clause built for the ngram,
-     *  where the last comparison is a LIKE clauses instead of = clause.
+    /** Returns a string containing an SQL WHERE clause built for the
+     *  ngram, where the last comparison is a LIKE clauses instead of
+     *  = clause and also possibly contains a filter on the last word
+     *  and a count threshold.
      */
-    std::string buildWhereLikeClause(const Ngram ngram) const;
-
-    /** Same as buildWhereLikeClause but considers also a filter on the subsequent letter
-     */
-    std::string buildWhereLikeClauseFiltered(const Ngram ngram,const char** filter) const;
+    std::string buildWhereLikeClause(const Ngram ngram,
+				     const char** filter,
+				     const int count_threshold) const;
 
     /** Returns a string containing an SQL VALUES clause built for the ngram.
      */
