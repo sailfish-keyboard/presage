@@ -59,6 +59,9 @@ namespace presage_csharp_demo
                 }
 
                 prsg.save_config();
+
+                System.Console.WriteLine("version: " + prsg.version());
+
             }
             catch (PresageException ex)
             {

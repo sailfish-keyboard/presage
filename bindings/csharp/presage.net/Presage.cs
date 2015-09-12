@@ -135,6 +135,12 @@ namespace presage
             IntPtr presage
         );
 
+        [DllImport("libpresage-1.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern int presage_version(
+            IntPtr presage,
+            out IntPtr result
+        );
+
         [DllImport("kernel32.dll", SetLastError = true)]
         private static extern bool SetDllDirectory(string lpPathName);
         
@@ -338,6 +344,23 @@ namespace presage
                 throw new PresageException(String.Format("presage_save_config() error code: {0}", rc));
             }
 
+        }
+
+        public string version()
+        {
+            string result;
+
+            IntPtr str_ptr;
+
+            int rc = presage_version(prsg, out str_ptr);
+            if (rc != 0)
+            {
+                throw new PresageException(String.Format("presage_version() error code: {0}", rc));
+            }
+
+            result = Marshal.PtrToStringAnsi(str_ptr);
+
+            return result;
         }
 
         private string read_presage_registy_key()

@@ -1,3 +1,16 @@
+2015-09-12  Matteo Vescovi  <matteo(dot)vescovi(at)yahoo(dot)co(dot)uk>
+
+	* src/lib/libpresage.map, src/lib/presage.cpp, src/lib/presage.h,
+	bindings/csharp/presage.net/IPresage.cs,
+	bindings/csharp/presage.net/Presage.cs,
+	bindings/csharp/presage_csharp_demo/presage_csharp_demo.cs,
+	bindings/csharp/presage_wcf_service/IPresageService.cs,
+	bindings/csharp/presage_wcf_service/PresageService.cs,
+	bindings/csharp/presage_wcf_service_system_tray/AboutForm.Designer.cs,
+	bindings/csharp/presage_wcf_service_system_tray/AboutForm.cs,
+	bindings/csharp/presage_wcf_service_system_tray/AboutForm.resx:
+	add version() to API to retrieve presage release version.
+
 2015-09-05  Matteo Vescovi  <matteo(dot)vescovi(at)yahoo(dot)co(dot)uk>
 
 	* resources/profiles/presage.xml.template

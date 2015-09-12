@@ -233,6 +233,12 @@ void Presage::save_config () const
     profileManager->save_profile ();
 }
 
+std::string Presage::version () const
+    throw (PresageException)
+{
+    return VERSION;
+}
+
 
 
 struct _presage {
@@ -457,5 +463,13 @@ presage_error_code_t presage_save_config (presage_t prsg)
     presage_exception_handler 
     (
 	prsg->presage_object->save_config ()
+    );
+}
+
+presage_error_code_t presage_version (presage_t prsg, char** result)
+{
+    presage_exception_handler_with_result
+    (
+	*result = alloc_c_str (prsg->presage_object->version ());
     );
 }

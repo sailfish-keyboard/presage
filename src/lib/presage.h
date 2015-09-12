@@ -238,6 +238,13 @@ public:
      */
     void save_config() const throw (PresageException);
 
+    /** \brief Returns presage release version.
+     *
+     * Programmatically retrieve the presage release version string.
+     *
+     */
+    std::string version() const throw (PresageException);
+
     /*
      * Presage public API ends here
      */
@@ -316,6 +323,9 @@ extern "C" {
                                                       const char* value);
     
     presage_error_code_t presage_save_config         (presage_t prsg);
+
+    presage_error_code_t presage_version             (presage_t prsg,
+                                                      char** result);
 
 #ifdef __cplusplus
 }

@@ -56,5 +56,8 @@ namespace presage_wcf_service
 
         [OperationContract]
         void save_config();
+
+        [OperationContract]
+        string version();
     }
 }

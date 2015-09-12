@@ -43,5 +43,7 @@ namespace presage
         void set_config(string variable, string value);
 
         void save_config();
+
+        string version();
     }
 }

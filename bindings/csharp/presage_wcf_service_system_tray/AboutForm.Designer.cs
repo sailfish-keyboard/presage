@@ -58,11 +58,12 @@ namespace presage_wcf_service_system_tray
             this.presageLabel = new System.Windows.Forms.Label();
             this.taglineLabel = new System.Windows.Forms.Label();
             this.disclaimerLabel = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.copyrightLabel = new System.Windows.Forms.Label();
             this.linkLabel = new System.Windows.Forms.LinkLabel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.licenseButton = new System.Windows.Forms.Button();
             this.closeButton = new System.Windows.Forms.Button();
+            this.presageVersionLabel = new System.Windows.Forms.Label();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.presageLogoBox)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -75,8 +76,9 @@ namespace presage_wcf_service_system_tray
             this.flowLayoutPanel1.Controls.Add(this.titleLabel);
             this.flowLayoutPanel1.Controls.Add(this.presageLabel);
             this.flowLayoutPanel1.Controls.Add(this.taglineLabel);
+            this.flowLayoutPanel1.Controls.Add(this.presageVersionLabel);
             this.flowLayoutPanel1.Controls.Add(this.disclaimerLabel);
-            this.flowLayoutPanel1.Controls.Add(this.label1);
+            this.flowLayoutPanel1.Controls.Add(this.copyrightLabel);
             this.flowLayoutPanel1.Controls.Add(this.linkLabel);
             this.flowLayoutPanel1.Controls.Add(this.tableLayoutPanel1);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -132,7 +134,7 @@ namespace presage_wcf_service_system_tray
             | System.Windows.Forms.AnchorStyles.Right)));
             this.taglineLabel.AutoSize = true;
             this.taglineLabel.Location = new System.Drawing.Point(10, 126);
-            this.taglineLabel.Margin = new System.Windows.Forms.Padding(0, 0, 0, 30);
+            this.taglineLabel.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.taglineLabel.Name = "taglineLabel";
             this.taglineLabel.Size = new System.Drawing.Size(180, 26);
             this.taglineLabel.TabIndex = 3;
@@ -144,7 +146,7 @@ namespace presage_wcf_service_system_tray
             this.disclaimerLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.disclaimerLabel.AutoSize = true;
-            this.disclaimerLabel.Location = new System.Drawing.Point(10, 182);
+            this.disclaimerLabel.Location = new System.Drawing.Point(10, 175);
             this.disclaimerLabel.Margin = new System.Windows.Forms.Padding(0, 0, 0, 20);
             this.disclaimerLabel.Name = "disclaimerLabel";
             this.disclaimerLabel.Size = new System.Drawing.Size(180, 78);
@@ -154,25 +156,25 @@ namespace presage_wcf_service_system_tray
     "nt permitted by law.";
             this.disclaimerLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // label1
+            // copyrightLabel
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.copyrightLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(10, 280);
-            this.label1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 10);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(180, 13);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Copyright (C) Matteo Vescovi";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.copyrightLabel.AutoSize = true;
+            this.copyrightLabel.Location = new System.Drawing.Point(10, 273);
+            this.copyrightLabel.Margin = new System.Windows.Forms.Padding(0, 0, 0, 10);
+            this.copyrightLabel.Name = "copyrightLabel";
+            this.copyrightLabel.Size = new System.Drawing.Size(180, 13);
+            this.copyrightLabel.TabIndex = 5;
+            this.copyrightLabel.Text = "Copyright (C) Matteo Vescovi";
+            this.copyrightLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // linkLabel
             // 
             this.linkLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.linkLabel.AutoSize = true;
-            this.linkLabel.Location = new System.Drawing.Point(10, 303);
+            this.linkLabel.Location = new System.Drawing.Point(10, 296);
             this.linkLabel.Margin = new System.Windows.Forms.Padding(0, 0, 0, 20);
             this.linkLabel.Name = "linkLabel";
             this.linkLabel.Size = new System.Drawing.Size(180, 13);
@@ -193,7 +195,7 @@ namespace presage_wcf_service_system_tray
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Controls.Add(this.licenseButton, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.closeButton, 1, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(10, 336);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(10, 329);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
@@ -226,6 +228,18 @@ namespace presage_wcf_service_system_tray
             this.closeButton.UseVisualStyleBackColor = true;
             this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
             // 
+            // presageVersionLabel
+            // 
+            this.presageVersionLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.presageVersionLabel.AutoSize = true;
+            this.presageVersionLabel.Location = new System.Drawing.Point(10, 157);
+            this.presageVersionLabel.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
+            this.presageVersionLabel.Name = "presageVersionLabel";
+            this.presageVersionLabel.Size = new System.Drawing.Size(180, 13);
+            this.presageVersionLabel.TabIndex = 8;
+            this.presageVersionLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // AboutForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -253,10 +267,11 @@ namespace presage_wcf_service_system_tray
         private System.Windows.Forms.Label presageLabel;
         private System.Windows.Forms.Label taglineLabel;
         private System.Windows.Forms.Label disclaimerLabel;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label copyrightLabel;
         private System.Windows.Forms.LinkLabel linkLabel;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button licenseButton;
         private System.Windows.Forms.Button closeButton;
+        private System.Windows.Forms.Label presageVersionLabel;
     }
 }

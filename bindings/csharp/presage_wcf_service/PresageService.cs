@@ -112,5 +112,10 @@ namespace presage_wcf_service
         {
             prsg.save_config();
         }
+
+        public string version()
+        {
+            return prsg.version();
+        }
     }
 }

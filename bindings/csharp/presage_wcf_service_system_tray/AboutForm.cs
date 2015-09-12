@@ -39,6 +39,16 @@ namespace presage_wcf_service_system_tray
         public AboutForm()
         {
             InitializeComponent();
+            try
+            {
+                presage_wcf_service.IPresageService prsg = new presage_wcf_service.PresageService();
+                this.presageVersionLabel.Text = prsg.version();
+            }
+            catch (Exception e)
+            {
+                // ignore exception
+                this.presageVersionLabel.Text = "unknown version";
+            }
         }
 
         private void closeButton_Click(object sender, EventArgs e)
