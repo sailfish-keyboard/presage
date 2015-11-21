@@ -115,6 +115,21 @@ int main()
 	presage_free_string_array (prediction);    
     }
 
+
+    const char* filter[] = {
+	"ar",
+	"at",
+	0
+    };
+    presage_prediction_t prediction_filtered = 0;
+    if (PRESAGE_OK == presage_predict_with_filter (prsg, filter, &prediction_filtered))
+    {
+	for (i = 0; prediction_filtered[i].token != 0; i++)
+	    printf ("filtered prediction[" PRI_SIZE_T_SPECIFIER "]: %2.10f  %s\n",
+		    i, prediction_filtered[i].probability, prediction_filtered[i].token);
+	presage_free_prediction (prediction_filtered);
+    }
+
     presage_save_config (prsg);
 
     presage_free (prsg);

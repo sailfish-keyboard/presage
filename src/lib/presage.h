@@ -277,6 +277,14 @@ extern "C" {
 
     typedef struct _presage* presage_t;
 
+    typedef struct {
+	char*  token;
+	double probability;
+    } presage_suggestion_t;
+
+    typedef presage_suggestion_t* presage_prediction_t;
+
+
     presage_error_code_t presage_new                 (_presage_callback_get_past_stream past_stream_cb,
                                                       void* past_stream_cb_arg,
                                                       _presage_callback_get_future_stream future_stream_cb,
@@ -293,10 +301,17 @@ extern "C" {
     void                 presage_free                (presage_t prsg);
     
     void                 presage_free_string         (char* str);
+
     void                 presage_free_string_array   (char** str);
+
+    void                 presage_free_prediction     (presage_prediction_t prediction);
 
     presage_error_code_t presage_predict             (presage_t prsg,
                                                       char*** result);
+
+    presage_error_code_t presage_predict_with_filter  (presage_t prsg,
+                                                      const char** filter,
+                                                      presage_prediction_t* result);
     
     presage_error_code_t presage_learn               (presage_t prsg,
 						      const char* text);

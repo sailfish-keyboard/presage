@@ -242,8 +242,8 @@ std::string Presage::version () const
 
 
 struct _presage {
-  PresageCallback* presage_callback_object;
-  Presage*         presage_object;
+    PresageCallback* presage_callback_object;
+    Presage*         presage_object;
 };
 
 class CPresageCallback : public PresageCallback
@@ -368,11 +368,23 @@ void presage_free_string (char* str)
 
 void presage_free_string_array (char** strs)
 {
-    if (strs) {
-	for (size_t t = 0; strs[t] != 0; t++) {
+    if (strs)
+    {
+	for (size_t t = 0; strs[t] != 0; t++)
 	    free (strs[t]);
-	}
+
 	free (strs);
+    }
+}
+
+void presage_free_prediction (presage_prediction_t prediction)
+{
+    if (prediction)
+    {
+	for (size_t i = 0; prediction[i].token != 0; ++i)
+	    free (prediction[i].token);
+
+	free (prediction);
     }
 }
 
@@ -399,6 +411,51 @@ presage_error_code_t presage_predict (presage_t prsg, char*** result)
         }
 	
 	*result = prediction_c_str;
+    );
+}
+
+presage_error_code_t presage_predict_with_filter (presage_t prsg, const char ** filter, presage_prediction_t* result)
+{
+    // These typedefs are needed because the presage_exception_handler_with result
+    // macro below will choke on the comma in the type declarations.
+    // Typedef'ing them outside of the scope of the macro argument works. Yahoo!
+    //
+    typedef std::multimap<double, std::string> prediction_map_t;
+    typedef std::multimap<double, std::string>::const_reverse_iterator prediction_map_const_reverse_iterator_t;
+
+    presage_exception_handler_with_result
+    (
+	std::vector<std::string> filt;
+	for (size_t i = 0; filter[i] != 0; i++)
+	{
+	    filt.push_back(filter[i]);
+	}
+
+	prediction_map_t prediction = prsg->presage_object->predict (filt);
+	size_t prediction_result_size = prediction.size() + 1;
+	presage_prediction_t prediction_result = (presage_prediction_t) malloc (prediction_result_size * sizeof (*prediction_result));
+
+	if (prediction_result != NULL)
+	{
+	    memset (prediction_result, 0, prediction_result_size * sizeof (*prediction_result));
+
+	    size_t i = 0;
+	    for (prediction_map_const_reverse_iterator_t it = prediction.rbegin();
+		 it != prediction.rend();
+		 ++it)
+	    {
+		prediction_result[i].token = (char*) malloc ((it->second).size() + 1);
+		if (prediction_result[i].token != NULL)
+		{
+		    strcpy (prediction_result[i].token, (it->second).c_str());
+		}
+		prediction_result[i].probability = it->first;
+
+		i++;
+	    }
+	}
+
+	*result = prediction_result;
     );
 }
 

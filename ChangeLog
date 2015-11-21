@@ -1,3 +1,9 @@
+2015-11-21  Matteo Vescovi  <matteo(dot)vescovi(at)yahoo(dot)co(dot)uk>
+
+	* bindings/c/libpresage-1.def, bindings/c/presage_c_demo.c,
+	src/lib/libpresage.map, src/lib/presage.cpp, src/lib/presage.h:
+	expose the filtered predict() method in the C API.
+
 2015-09-12  Matteo Vescovi  <matteo(dot)vescovi(at)yahoo(dot)co(dot)uk>
 
 	* src/lib/libpresage.map, src/lib/presage.cpp, src/lib/presage.h,

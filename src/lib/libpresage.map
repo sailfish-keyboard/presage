@@ -50,4 +50,6 @@ global:
 		Presage::version*;
 	};
 	presage_version;
+	presage_predict_with_filter;
+	presage_free_prediction;
 } PRESAGE_0.9.1;

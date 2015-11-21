@@ -12,5 +12,6 @@ presage_learn
 presage_new
 presage_new_with_config
 presage_predict
+presage_predict_with_filter
 presage_prefix
 presage_save_config
