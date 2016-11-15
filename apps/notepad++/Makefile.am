@@ -22,20 +22,20 @@
 ## Process this file with automake to produce Makefile.in
 
 EXTRA_DIST = \
-	menuCmdID.h \
-	no_ms_shit.props \
-	no_ms_shit.vsprops \
-	Notepad_plus_msgs.h \
-	NppPresage.cpp \
-	NppPresage.sln \
-	NppPresage_vc8.sln \
-	NppPresage.vcxproj \
-	NppPresage.vcxproj.filters \
-	NppPresage.vcxproj.user \
-	PluginDefinition.cpp \
-	PluginDefinition.h \
-	PluginInterface.h \
-	PresageUplink.cpp \
-	PresageUplink.h \
 	README \
-	Scintilla.h 
+	src/menuCmdID.h \
+	src/no_ms_shit.props \
+	src/no_ms_shit.vsprops \
+	src/Notepad_plus_msgs.h \
+	src/NppPresage.cpp \
+	src/NppPresage.sln \
+	src/NppPresage_vc8.sln \
+	src/NppPresage.vcxproj \
+	src/NppPresage.vcxproj.filters \
+	src/NppPresage.vcxproj.user \
+	src/PluginDefinition.cpp \
+	src/PluginDefinition.h \
+	src/PluginInterface.h \
+	src/PresageUplink.cpp \
+	src/PresageUplink.h \
+	src/Scintilla.h 
