@@ -68,6 +68,7 @@ static bool read_presage_registry_key(TCHAR path[])
     return bRet;
 }
 
+#pragma warning(disable : 4706)
 bool LoadPresageDLL(void)
 {
     bool    bRet = FALSE;
@@ -108,6 +109,7 @@ bool LoadPresageDLL(void)
 
     if (hInstLib != NULL)
     {
+
 	if ((presage_completion = (PFUNC_presage_completion) GetProcAddress (hInstLib, "presage_completion"))
 	    && (presage_config = (PFUNC_presage_config) GetProcAddress (hInstLib, "presage_config"))
 	    && (presage_config_set = (PFUNC_presage_config_set) GetProcAddress (hInstLib, "presage_config_set"))

@@ -24,11 +24,10 @@
 
 
 #include "PluginDefinition.h"
-#include "PresageUplink.h"
 #include "menuCmdID.h"
 
+#include "PresageUplink.h"
 #include <cstdio>
-
 
 //
 // The plugin data that Notepad++ needs
@@ -70,7 +69,7 @@ extern PFUNC_presage_save_config presage_save_config;
 //
 // Initialize your plugin data here
 // It will be called while plugin loading   
-void pluginInit(HANDLE hModule)
+void pluginInit(HANDLE /*hModule*/)
 {
     glob_presage_enabled = LoadPresageDLL();
 }
@@ -92,6 +91,15 @@ void commandMenuInit()
     //--------------------------------------------//
     //-- STEP 3. CUSTOMIZE YOUR PLUGIN COMMANDS --//
     //--------------------------------------------//
+    // with function :
+    // setCommand(int index,                      // zero based number to indicate the order of command
+    //            TCHAR *commandName,             // the command name that you want to see in plugin menu
+    //            PFUNCPLUGINCMD functionPointer, // the symbol of function (function pointer) associated with this command. The body should be defined below. See Step 4.
+    //            ShortcutKey *shortcut,          // optional. Define a shortcut to trigger this command
+    //            bool check0nInit                // optional. Make this menu item be checked visually
+    //            );
+    //setCommand(0, TEXT("Hello Notepad++"), hello, NULL, false);
+    //setCommand(1, TEXT("Hello (with dialog)"), helloDlg, NULL, false);
 
     funcItem[CMD_ENABLED]._pFunc = on_enable;
     lstrcpy(funcItem[CMD_ENABLED]._itemName, TEXT("Enable"));
@@ -154,7 +162,6 @@ void commandMenuInit()
     funcItem[CMD_HELP]._pShKey->_isShift = true;
     funcItem[CMD_HELP]._pShKey->_key = 'H';
     funcItem[CMD_HELP]._init2Check = false;
-
 }
 
 //
@@ -162,6 +169,7 @@ void commandMenuInit()
 //
 void commandMenuCleanUp()
 {
+	// Don't forget to deallocate your shortcut here
     delete funcItem[CMD_ENABLED]._pShKey;
     delete funcItem[CMD_LEARN_MODE]._pShKey;
     delete funcItem[CMD_AUTOPUNCTUATION]._pShKey;
@@ -171,19 +179,37 @@ void commandMenuCleanUp()
 }
 
 
+//
+// This function help you to initialize your plugin commands
+//
+bool setCommand(size_t index, TCHAR *cmdName, PFUNCPLUGINCMD pFunc, ShortcutKey *sk, bool check0nInit) 
+{
+    if (index >= nbFunc)
+        return false;
+
+    if (!pFunc)
+        return false;
+
+    lstrcpy(funcItem[index]._itemName, cmdName);
+    funcItem[index]._pFunc = pFunc;
+    funcItem[index]._init2Check = check0nInit;
+    funcItem[index]._pShKey = sk;
+
+    return true;
+}
+
 //----------------------------------------------//
 //-- STEP 4. DEFINE YOUR ASSOCIATED FUNCTIONS --//
 //----------------------------------------------//
-
 static const char* get_past_stream (void* scintilla)
 {
     HWND sci = (HWND) scintilla;
 
     static struct TextRange range;
-    range.chrg.cpMax = ::SendMessage(sci,
+    range.chrg.cpMax = (long) ::SendMessage(sci,
                                      SCI_GETCURRENTPOS,
                                      0,
-                                     0);
+                                     (LPARAM) 0);
     range.chrg.cpMin = range.chrg.cpMax - glob_max_callback_context_range_size;
     if (range.chrg.cpMin < 0)
     {
@@ -208,11 +234,11 @@ static const char* get_future_stream (void* scintilla)
     HWND sci = (HWND) scintilla;
 
     static struct TextRange range;
-    range.chrg.cpMin = ::SendMessage(sci,
+    range.chrg.cpMin = (long) ::SendMessage(sci,
                                      SCI_GETCURRENTPOS,
                                      0,
                                      0);
-    range.chrg.cpMax = ::SendMessage(sci,
+    range.chrg.cpMax = (long) ::SendMessage(sci,
                                      SCI_GETTEXTLENGTH,
                                      0,
                                      0);
@@ -380,7 +406,7 @@ static char* stringify_prediction (char** prediction)
     return result;
 }
 
-static void on_predict ()
+void on_predict ()
 {
     // Get the current scintilla
     int which = -1;
@@ -527,7 +553,7 @@ void on_help()
                            TEXT("To insert a suggestion from the prediction autocompletion menu, press <Enter>.\n")
                            TEXT("To insert a newline, press <Ctrl-Shift-Alt-Enter>.\n")
                            TEXT("To see more choices, press <Ctrl-Shift-Alt-P>.\n")
-                           TEXT("To configure NppPresage, see the Plugins->NppPlugin menu."),
+                           TEXT("To configure NppPresage, see the Plugins->NppPresage menu."),
                            TEXT("Presage Notepad++ plugin"), MB_OK);
     }
 }
@@ -576,7 +602,7 @@ static void on_user_list_selection(struct SCNotification* nt, HWND scintilla)
 }
 
 
-static void on_update_ui(struct SCNotification* notification, HWND scintilla)
+static void on_update_ui(struct SCNotification* /*nt*/, HWND /*scintilla*/)
 {
     on_predict ();
 }
@@ -606,11 +632,11 @@ static void on_char_added (struct SCNotification* nt, HWND scintilla)
                 //g_print ("prev_char: %c\n", prev_char);
 
                 /* if previous char is a autopunctuation whitespace char */
-                if (strchr (glob_autopunctuation_whitespace, prev_char))
+                if (strchr (glob_autopunctuation_whitespace, (int) prev_char))
                 {
                     //g_print ("autopunctuation activated\n");
 
-                    char replacement[3] = { nt->ch, prev_char, 0 };
+                    char replacement[3] = { (char) nt->ch, (char) prev_char, 0 };
 
                     ::SendMessage(scintilla,
                                   SCI_SETSELECTION,
@@ -679,6 +705,7 @@ static void on_key (struct SCNotification* nt, HWND scintilla)
 
 void on_notification (struct SCNotification* notification)
 {
+	//::MessageBox(NULL, TEXT("on_notification"), TEXT("notification"), MB_OK);
     switch (notification->nmhdr.code) {
     case NPPN_SHUTDOWN:
         commandMenuCleanUp();

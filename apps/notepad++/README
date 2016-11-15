@@ -20,11 +20,13 @@ and build it.
 
 Alternatively, to rebuild on the command line:
 
-  devenv /Rebuild "Unicode Release" NppPresage.sln
+    devenv /Rebuild "Release|x64" vs.proj\NppPresage.sln
+or
+    devenv /Rebuild "Release|Win32" vs.proj\NppPresage.sln
+
 
 To rebuild in Unicode Debug mode:
 
-  devenv /Rebuild "Unicode Debug" NppPresage.sln
-
-
-A Visual Studio 2008 solution is also provided (NppPresage_vc8.sln).
+    devenv /Rebuild "Debug|x64" vs.proj\NppPresage.sln
+or
+    devenv /Rebuild "Debug|Win32" vs.proj\NppPresage.sln

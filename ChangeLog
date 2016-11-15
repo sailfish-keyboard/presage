@@ -1,3 +1,9 @@
+2016-11-15  Matteo Vescovi  <matteo(dot)vescovi(at)yahoo(dot)co(dot)uk>
+
+	* apps/notepad++/**: merged latest Notepad++ plugintemplate
+	sources in NppPresage plugin to enable support for 32-bit and
+	64-bit presage notepad++ plugin builds.
+
 2015-11-21  Matteo Vescovi  <matteo(dot)vescovi(at)yahoo(dot)co(dot)uk>
 
 	* bindings/c/libpresage-1.def, bindings/c/presage_c_demo.c,
