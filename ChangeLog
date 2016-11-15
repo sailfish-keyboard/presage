@@ -4,6 +4,9 @@
 	sources in NppPresage plugin to enable support for 32-bit and
 	64-bit presage notepad++ plugin builds.
 
+	* src/lib/core/charsets.h: remove narrowing conversion from 'int'
+	to 'char' error.
+
 2015-11-21  Matteo Vescovi  <matteo(dot)vescovi(at)yahoo(dot)co(dot)uk>
 
 	* bindings/c/libpresage-1.def, bindings/c/presage_c_demo.c,
