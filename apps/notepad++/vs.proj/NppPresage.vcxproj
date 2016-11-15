@@ -19,13 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\src\DockingFeature\Docking.h" />
-    <ClInclude Include="..\src\DockingFeature\DockingDlgInterface.h" />
-    <ClInclude Include="..\src\DockingFeature\dockingResource.h" />
-    <ClInclude Include="..\src\DockingFeature\GoToLineDlg.h" />
-    <ClInclude Include="..\src\DockingFeature\resource.h" />
-    <ClInclude Include="..\src\DockingFeature\StaticDialog.h" />
-    <ClInclude Include="..\src\DockingFeature\Window.h" />
     <ClInclude Include="..\src\menuCmdID.h" />
     <ClInclude Include="..\src\Notepad_plus_msgs.h" />
     <ClInclude Include="..\src\PluginDefinition.h" />
@@ -34,14 +27,9 @@
     <ClInclude Include="..\src\Scintilla.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\DockingFeature\GoToLineDlg.cpp" />
-    <ClCompile Include="..\src\DockingFeature\StaticDialog.cpp" />
     <ClCompile Include="..\src\NppPresage.cpp" />
     <ClCompile Include="..\src\PluginDefinition.cpp" />
     <ClCompile Include="..\src\PresageUplink.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="..\src\DockingFeature\goLine.rc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{EAB5E3C7-1FB9-40E7-AA80-D640449894FE}</ProjectGuid>

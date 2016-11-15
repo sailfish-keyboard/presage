@@ -23,16 +23,11 @@
 
 EXTRA_DIST = \
 	README \
+	vs.proj/NppPresage.sln \
+	vs.proj/NppPresage.vcxproj \
 	src/menuCmdID.h \
-	src/no_ms_shit.props \
-	src/no_ms_shit.vsprops \
 	src/Notepad_plus_msgs.h \
 	src/NppPresage.cpp \
-	src/NppPresage.sln \
-	src/NppPresage_vc8.sln \
-	src/NppPresage.vcxproj \
-	src/NppPresage.vcxproj.filters \
-	src/NppPresage.vcxproj.user \
 	src/PluginDefinition.cpp \
 	src/PluginDefinition.h \
 	src/PluginInterface.h \
