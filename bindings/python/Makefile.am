@@ -72,6 +72,7 @@ install-exec-local:
 #
 uninstall-local:
 	rm -f $(DESTDIR)$(libdir)/python*/site-packages/_presage.so
+	rm -f $(DESTDIR)$(libdir)/python*/site-packages/_presage.pyd
 	rm -f $(DESTDIR)$(libdir)/python*/site-packages/presage.py
 	rm -f $(DESTDIR)$(libdir)/python*/site-packages/presage.pyc
 	rm -f $(DESTDIR)$(libdir)/python*/site-packages/python_presage-*.egg-info
