@@ -536,7 +536,7 @@ void on_about()
                  TEXT("Built on ") TEXT(__DATE__) TEXT(" at ") TEXT(__TIME__) TEXT("\n")
                  TEXT("\n")
                  TEXT("Copyright (C) 2013 Matteo Vescovi"),
-                 TEXT("Presage Notepad++ plugin"),
+                 TEXT("About Presage Notepad++ plugin"),
                  MB_OK);
 }
 
@@ -545,7 +545,15 @@ void on_help()
 {
     if (! hInstLib)
     {
-        ::MessageBox(NULL, TEXT("Presage, the intelligent predictive text entry platform, is not installed on your system. Please install presage."), TEXT("Presage Notepad++ plugin"), MB_OK);
+        ::MessageBox(NULL,
+		     TEXT("Presage Notepad++ plugin requires Presage, the intelligent predictive text entry platform.\n")
+		     TEXT("\n")
+		     TEXT("Presage is not installed on your system.\n")
+		     TEXT("\n")
+		     TEXT("Please download and install presage:\n")
+		     TEXT("http://presage.sourceforge.net/\n"),
+		     TEXT("Help with Presage Notepad++ plugin"),
+		     MB_OK);
     }
     else
     {
@@ -553,8 +561,8 @@ void on_help()
                            TEXT("To insert a suggestion from the prediction autocompletion menu, press <Enter>.\n")
                            TEXT("To insert a newline, press <Ctrl-Shift-Alt-Enter>.\n")
                            TEXT("To see more choices, press <Ctrl-Shift-Alt-P>.\n")
-                           TEXT("To configure NppPresage, see the Plugins->NppPresage menu."),
-                           TEXT("Presage Notepad++ plugin"), MB_OK);
+                           TEXT("To configure Presage Notepad++ plugin, see the Plugins->Presage menu."),
+                           TEXT("Help with Presage Notepad++ plugin"), MB_OK);
     }
 }
 
