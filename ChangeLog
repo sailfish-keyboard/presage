@@ -1,3 +1,9 @@
+2016-11-16  Matteo Vescovi  <matteo(dot)vescovi(at)yahoo(dot)co(dot)uk>
+
+	* packaging/windows/*: update Windows installer to package 64-bit
+	Notepad++ presage plugin, fix packaging to work with latest MSYS2
+	update.
+
 2016-11-15  Matteo Vescovi  <matteo(dot)vescovi(at)yahoo(dot)co(dot)uk>
 
 	* apps/notepad++/**: merged latest Notepad++ plugintemplate

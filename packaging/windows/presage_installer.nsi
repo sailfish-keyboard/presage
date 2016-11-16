@@ -151,9 +151,9 @@ Section "-Runtime" SecRuntime
   File "bin\Qt5Gui.dll"
   File "bin\Qt5Widgets.dll"
   File "bin\Qt5PrintSupport.dll"
-  File "bin\libicuin55.dll"
-  File "bin\libicuuc55.dll"
-  File "bin\libicudt55.dll"
+  File "bin\libicuin57.dll"
+  File "bin\libicuuc57.dll"
+  File "bin\libicudt57.dll"
   File "bin\libpcre16-0.dll"
 
   ; GTK deps
@@ -187,6 +187,8 @@ Section "-Runtime" SecRuntime
   File "bin\libharfbuzz-0.dll"
   File "bin\libiconv-2.dll"
   File "bin\libpixman-1-0.dll"
+  File "bin\libpcre-1.dll"
+  File "bin\libgraphite2.dll"
 
 
   ; etc/
@@ -222,7 +224,7 @@ Section "-Runtime" SecRuntime
   WriteUninstaller "$INSTDIR\Uninstall.exe"
 
   ;Add uninstall information to Add/Remove Programs
-  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\presage" "DisplayName" "${PRESAGE_NAME}"
+  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\presage" "DisplayName" "${PRESAGE_NAME} (${BITNESS}-bit)"
   WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\presage" "UninstallString" "$INSTDIR\Uninstall.exe"
   WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\presage" "InstallLocation" "$INSTDIR"
   WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\presage" "Publisher" "http://presage.sourceforge.net"
@@ -308,7 +310,6 @@ SectionEnd
 
 ;----
 ;Notepad++ plugin section
-!if "${BITNESS}" == "32"
 Section "Notepad++ plugin" SecNpp
 
   ; Skip section if /NoNpp flag was passed in
@@ -336,7 +337,6 @@ npp_done:
 
 SectionEnd
 
-!endif
 
 ;--------------------------------
 ;Descriptions
@@ -356,9 +356,7 @@ SectionEnd
     !insertmacro MUI_DESCRIPTION_TEXT ${SecPython} $(DESC_SecPython)
     !insertmacro MUI_DESCRIPTION_TEXT ${SecNET} $(DESC_SecNET)
     !insertmacro MUI_DESCRIPTION_TEXT ${SecWCF} $(DESC_SecWCF)
-!if "${BITNESS}" == "32"
     !insertmacro MUI_DESCRIPTION_TEXT ${SecNpp} $(DESC_SecNpp)
-!endif
   !insertmacro MUI_FUNCTION_DESCRIPTION_END
  
 ;--------------------------------
@@ -404,9 +402,9 @@ Section "Uninstall"
   Delete "$INSTDIR\bin\Qt5Gui.dll"
   Delete "$INSTDIR\bin\Qt5Widgets.dll"
   Delete "$INSTDIR\bin\Qt5PrintSupport.dll"
-  Delete "$INSTDIR\bin\libicuin55.dll"
-  Delete "$INSTDIR\bin\libicuuc55.dll"
-  Delete "$INSTDIR\bin\libicudt55.dll"
+  Delete "$INSTDIR\bin\libicuin57.dll"
+  Delete "$INSTDIR\bin\libicuuc57.dll"
+  Delete "$INSTDIR\bin\libicudt57.dll"
   Delete "$INSTDIR\bin\libpcre16-0.dll"
   Delete "$INSTDIR\bin\libwinpthread-1.dll"
 
@@ -441,6 +439,8 @@ Section "Uninstall"
   Delete "$INSTDIR\bin\libharfbuzz-0.dll"
   Delete "$INSTDIR\bin\libiconv-2.dll"
   Delete "$INSTDIR\bin\libpixman-1-0.dll"
+  Delete "$INSTDIR\bin\libpcre-1.dll"
+  Delete "$INSTDIR\bin\libgraphite2.dll"
 
   ; .NET binding deps
   Delete "$INSTDIR\bin\presage.net.dll"
@@ -543,15 +543,18 @@ Function .onInit
   ${GetParameters} $Parameters
   ClearErrors
 
+  SetRegView ${BITNESS}
 
   ; Check for existing previous presage installation
   ; and execute its uninstaller if found
-
   ReadRegStr $R0 HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\presage" "UninstallString"
   StrCmp $R0 "" onInitDone
   ReadRegStr $R1 HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\presage" "InstallLocation"
- 
-  MessageBox MB_OKCANCEL|MB_ICONEXCLAMATION "presage is already installed. $\n$\nClick `OK` to uninstall the previous version or `Cancel` to cancel this upgrade." /SD IDOK IDOK onInitUninstallPrevious
+
+  ReadRegStr $R2 HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\presage" "DisplayName"
+  ReadRegStr $R3 HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\presage" "DisplayVersion"
+  
+  MessageBox MB_OKCANCEL|MB_ICONEXCLAMATION "presage is already installed. $\n$\nClick `OK` to uninstall $R2 $R3 or `Cancel` to cancel this upgrade." /SD IDOK IDOK onInitUninstallPrevious
   Abort
  
 onInitUninstallPrevious:
