@@ -75,7 +75,7 @@ comes from a range of predictive mechanisms used to generate
 predictions. You can decide what plugins to enable and what predictive
 resources to tie those plugins to. All configuration variables can be
 controlled by editing the XML configuration file (either
-~/.presage.xml or presage.xml in the etc/ directory where
+~/.presage/presage.xml or presage.xml in the etc/ directory where
 Presage was installed - usually /etc -, whichever is found first).
 
 Feel free to experiment with different settings: try enabling
