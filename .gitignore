@@ -16,3 +16,98 @@ m4/ltversion.m4
 m4/lt~obsolete.m4
 missing
 py-compile
+Makefile
+*.Plo
+*.Po
+.dirstamp
+ar-lib
+stamp-h1
+libtool
+test-driver
+config.*
+.libs
+.directory
+pps/python/build
+
+apps/dbus/org.gnome.presage.service
+apps/dbus/presage_dbus_python_demo
+apps/dbus/setup.py
+apps/gtk/gprompter/gprompter
+apps/python/build/lib.linux-x86_64-2.7/prompter/__init__.py
+apps/python/build/lib.linux-x86_64-2.7/prompter/prompter.py
+apps/python/build/scripts-2.7/pyprompter
+apps/python/pypresagemate
+apps/python/pyprompter
+apps/python/setup.py
+apps/qt/qprompter/moc_mainwindow.cpp
+apps/qt/qprompter/qprompter
+apps/qt/qprompter/qrc_qprompter.cpp
+bindings/python/build/lib.linux-x86_64-2.7/presage.py
+bindings/python/build/scripts-2.7/presage_python_demo
+bindings/python/presage.py
+bindings/python/presage_python_demo
+bindings/python/presage_wrap.cpp
+bindings/python/presage_wrap.h
+bindings/python/setup.py
+dirs.h
+doc/Doxyfile
+resources/*.db
+resources/profiles/presage.xml
+src/tools/presage_demo
+src/tools/presage_demo_text
+src/tools/presage_simulator
+src/tools/text2ngram
+
+# from https://raw.githubusercontent.com/github/gitignore/master/C.gitignore
+# Prerequisites
+*.d
+
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Linker output
+*.ilk
+*.map
+*.exp
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# Kernel Module Compile Results
+*.mod*
+*.cmd
+.tmp_versions/
+modules.order
+Module.symvers
+Mkfile.old
+dkms.conf
