@@ -99,17 +99,21 @@ This package contains the documentation for libpresage.
 
 Documentation is available in HTML and LaTeX format.
 
+%prep
+%setup -q -n %{name}-%{version}
+
 %build
-#autoreconf -fi
-./bootstrap
+autoreconf -fi
+#./bootstrap
 %configure --disable-python-binding --disable-gpresagemate --disable-gprompter --disable-documentation
 make %{?_smp_mflags}
 
 %install
+rm -rf %{buildroot}
 make install DESTDIR=%{buildroot}
 
 
-%fdupes %{buildroot}
+#%fdupes %{buildroot}
 
 %post -n libpresage1 -p /sbin/ldconfig
 
