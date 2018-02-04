@@ -104,14 +104,14 @@ Documentation is available in HTML and LaTeX format.
 
 %build
 autoreconf -fi
-#./bootstrap
 %configure --disable-python-binding --disable-gpresagemate --disable-gprompter --disable-documentation
 make %{?_smp_mflags}
 
 %install
-rm -rf %{buildroot}
+pwd
+ls
+%{__rm} -rf %{buildroot}
 make install DESTDIR=%{buildroot}
-
 
 #%fdupes %{buildroot}
 
@@ -145,18 +145,16 @@ make install DESTDIR=%{buildroot}
 %files -n presage-data
 %defattr(-,root,root)
 %config %{_sysconfdir}/presage.xml
-%exclude %{_datadir}/presage
-%exclude %{_datadir}/presage/html
-%exclude %{_datadir}/presage/getting_started.txt
+#%exclude %{_datadir}/presage
+#%exclude %{_datadir}/presage/getting_started.txt
 
 %files -n libpresage-doc
 %defattr(-,root,root)
-#%{_datadir}/presage/html/
 %{_datadir}/presage/getting_started.txt
-%{_mandir}/man1/presage_demo.1.gz
-%{_mandir}/man1/presage_demo_text.1.gz
-%{_mandir}/man1/presage_simulator.1.gz
-%{_mandir}/man1/text2ngram.1.gz
+%{_mandir}/man1/presage_demo.1
+%{_mandir}/man1/presage_demo_text.1
+%{_mandir}/man1/presage_simulator.1
+%{_mandir}/man1/text2ngram.1
 
 %changelog
 * Wed Feb 08 2017 Miklos Marton <martonmiklosqdev@gmail.com> 2.1.0-0.0.3
