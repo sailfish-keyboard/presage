@@ -85,16 +85,6 @@ Presage is an intelligent predictive text entry platform.
 
 This package contains the global configuration file needed by the presage.
 
-%package -n presage-data-hu
-Summary:        Hungarian ngram databases
-Group:          System/Libraries
-Provides:       libpresage-data-hu = %{version}
-
-%description -n presage-data-hu
-Presage is an intelligent predictive text entry platform.
-
-This package contains the Hungarian ngram database.
-
 %package -n libpresage-doc
 Summary:        Intelligent predictive text entry platform (documentation)
 Group:          Documentation/Other
@@ -111,14 +101,11 @@ Documentation is available in HTML and LaTeX format.
 
 %build
 autoreconf -fi
-%configure --disable-python-binding --disable-gpresagemate --disable-gprompter
+%configure --disable-python-binding --disable-gpresagemate --disable-gprompter --disable-documentation
 make %{?_smp_mflags}
 
 %install
 make install DESTDIR=%{buildroot}
-
-rm -rf %{buildroot}%{_libdir}/*.a
-rm -rf %{buildroot}%{_libdir}/*.la
 
 
 %fdupes %{buildroot}
@@ -132,12 +119,8 @@ rm -rf %{buildroot}%{_libdir}/*.la
 %doc AUTHORS ChangeLog NEWS README COPYING THANKS TODO
 %{_bindir}/presage_demo
 %{_bindir}/presage_demo_text
-%{_mandir}/man1/presage_demo.1.gz
 %{_bindir}/presage_simulator
 %{_bindir}/text2ngram
-%{_mandir}/man1/presage_demo_text.1.gz
-%{_mandir}/man1/presage_simulator.1.gz
-%{_mandir}/man1/text2ngram.1.gz
 
 %files -n libpresage1
 %defattr(-,root,root)
@@ -150,6 +133,9 @@ rm -rf %{buildroot}%{_libdir}/*.la
 %{_includedir}/presageCallback.h
 %{_includedir}/presageException.h
 %{_includedir}/presage.h
+%{_libdir}/libpresage.a
+%{_libdir}/libpresage.la
+
 
 %files -n presage-data
 %defattr(-,root,root)
@@ -158,14 +144,14 @@ rm -rf %{buildroot}%{_libdir}/*.la
 %exclude %{_datadir}/presage/html
 %exclude %{_datadir}/presage/getting_started.txt
 
-%files -n presage-data-hu
-%defattr(-,root,root)
-%{_datadir}/presage/database_hu.db
-
 %files -n libpresage-doc
 %defattr(-,root,root)
-%{_datadir}/presage/html/
+#%{_datadir}/presage/html/
 %{_datadir}/presage/getting_started.txt
+%{_mandir}/man1/presage_demo.1.gz
+%{_mandir}/man1/presage_demo_text.1.gz
+%{_mandir}/man1/presage_simulator.1.gz
+%{_mandir}/man1/text2ngram.1.gz
 
 %changelog
 * Wed Feb 08 2017 Miklos Marton <martonmiklosqdev@gmail.com> 2.1.0-0.0.3
