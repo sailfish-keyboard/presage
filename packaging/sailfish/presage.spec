@@ -100,7 +100,8 @@ This package contains the documentation for libpresage.
 Documentation is available in HTML and LaTeX format.
 
 %build
-autoreconf -fi
+#autoreconf -fi
+./bootstrap
 %configure --disable-python-binding --disable-gpresagemate --disable-gprompter --disable-documentation
 make %{?_smp_mflags}
 
