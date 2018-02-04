@@ -15,11 +15,6 @@
 # Please submit bugfixes or comments via http://bugs.opensuse.org/
 #
 
-
-%define py_ver %(python -c "import sys; v=sys.version_info[:2]; print '%%d.%%d'%%v" 2>/dev/null || echo PYTHON-NOT-FOUND)
-%define _unpackaged_files_terminate_build 0 
-%define __spec_install_pre /bin/true
-
 Name:           presage
 Version:        0.9.1
 Release:        7.29
@@ -38,7 +33,7 @@ BuildRequires:  gcc-c++
 BuildRequires:  help2man
 BuildRequires:  libtool
 BuildRequires:  ncurses-devel
-BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+BuildRoot:      %{_tmppath}/%{name}-%{version}-root
 
 %description
 Presage is an intelligent predictive text entry platform.
@@ -108,10 +103,20 @@ autoreconf -fi
 make %{?_smp_mflags}
 
 %install
-pwd
-ls
 %{__rm} -rf %{buildroot}
 make install DESTDIR=%{buildroot}
+
+# cleanup unneeded files
+%{__rm} %{buildroot}%{_datadir}/presage/abbreviations_en.txt
+%{__rm} %{buildroot}%{_datadir}/presage/abbreviations_it.txt
+%{__rm} %{buildroot}%{_datadir}/presage/database_en.db
+%{__rm} %{buildroot}%{_datadir}/presage/database_es.db
+%{__rm} %{buildroot}%{_datadir}/presage/database_it.db
+%{__rm} %{buildroot}%{_datadir}/presage/presage.png
+%{__rm} %{buildroot}%{_datadir}/presage/presage.svg
+%{__rm} %{buildroot}%{_datadir}/presage/presage.xpm
+%{__rm} %{buildroot}%{_datadir}/presage/python_binding.txt
+
 
 #%fdupes %{buildroot}
 
@@ -151,10 +156,10 @@ make install DESTDIR=%{buildroot}
 %files -n libpresage-doc
 %defattr(-,root,root)
 %{_datadir}/presage/getting_started.txt
-%{_mandir}/man1/presage_demo.1
-%{_mandir}/man1/presage_demo_text.1
-%{_mandir}/man1/presage_simulator.1
-%{_mandir}/man1/text2ngram.1
+%{_mandir}/man1/presage_demo.1.gz
+%{_mandir}/man1/presage_demo_text.1.gz
+%{_mandir}/man1/presage_simulator.1.gz
+%{_mandir}/man1/text2ngram.1.gz
 
 %changelog
 * Wed Feb 08 2017 Miklos Marton <martonmiklosqdev@gmail.com> 2.1.0-0.0.3
