@@ -34,7 +34,8 @@
 DatabaseConnector::DatabaseConnector(const std::string database_name,
 				     const size_t cardinality,
 				     const bool read_write)
-    : logger("DatabaseConnector", std::cerr)
+    : logger("DatabaseConnector", std::cerr),
+      unigram_counts_sum(-1)
 {
     set_database_filename (database_name);
     set_cardinality (cardinality);
@@ -45,7 +46,8 @@ DatabaseConnector::DatabaseConnector(const std::string database_name,
 				     const size_t cardinality,
 				     const bool read_write,
 				     const std::string& log_level)
-    : logger("DatabaseConnector", std::cerr, log_level)
+    : logger("DatabaseConnector", std::cerr, log_level),
+      unigram_counts_sum(-1)
 {
     set_database_filename (database_name);
     set_cardinality (cardinality);
@@ -84,8 +86,11 @@ void DatabaseConnector::createNgramTable(const size_t n) const
     }
 }
 
-int DatabaseConnector::getUnigramCountsSum() const
+int DatabaseConnector::getUnigramCountsSum()
 {
+    if (unigram_counts_sum >= 0)
+      return unigram_counts_sum;
+    
     std::string query = "SELECT SUM(count) FROM _1_gram;";
 
     NgramTable result = executeSql(query);
@@ -98,7 +103,8 @@ int DatabaseConnector::getUnigramCountsSum() const
     logger << DEBUG << endl;
     }
 
-    return extractFirstInteger(result);
+    unigram_counts_sum = extractFirstInteger(result);
+    return unigram_counts_sum;
 }
 
 int DatabaseConnector::getNgramCount(const Ngram ngram) const
@@ -137,10 +143,13 @@ NgramTable DatabaseConnector::getNgramLikeTable(const Ngram ngram, const char** 
     return executeSql(query.str());
 }
 
-int DatabaseConnector::incrementNgramCount(const Ngram ngram) const
+int DatabaseConnector::incrementNgramCount(const Ngram ngram)
 {
     int count = getNgramCount(ngram);
 
+    // invalidate cached sum
+    unigram_counts_sum = -1;
+    
     if (count > 0) {
         // the ngram was found in the database
         updateNgram(ngram, ++count);
@@ -161,10 +170,13 @@ int DatabaseConnector::incrementNgramCount(const Ngram ngram) const
 void DatabaseConnector::removeNgram(const Ngram ngram) const
 {}
 
-void DatabaseConnector::insertNgram(const Ngram ngram, const int count) const
+void DatabaseConnector::insertNgram(const Ngram ngram, const int count)
 {
     std::stringstream query;
 
+    // invalidate cached sum
+    unigram_counts_sum = -1;
+    
     query << "INSERT INTO _" << ngram.size() << "_gram "
           << buildValuesClause(ngram, count)
           << ";";
@@ -172,10 +184,13 @@ void DatabaseConnector::insertNgram(const Ngram ngram, const int count) const
     executeSql(query.str());
 }
 
-void DatabaseConnector::updateNgram(const Ngram ngram, const int count) const
+void DatabaseConnector::updateNgram(const Ngram ngram, const int count)
 {
     std::stringstream query;
 
+    // invalidate cached sum
+    unigram_counts_sum = -1;
+    
     query << "UPDATE _" << ngram.size() << "_gram "
           << "SET count = " << count
           << buildWhereClause(ngram) << ";";

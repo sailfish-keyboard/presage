@@ -61,7 +61,7 @@ public:
 
     /** Returns an integer equal to the sum of the counts of all unigrams.
      */
-    int getUnigramCountsSum() const;
+    int getUnigramCountsSum();
 
     /** Returns an integer equal to the specified ngram count.
      */
@@ -80,15 +80,15 @@ public:
      * If the ngram does not yet exit in the database, it is created
      * and its count is set to one.
      */
-    int incrementNgramCount(const Ngram ngram) const;
+    int incrementNgramCount(const Ngram ngram);
 
     /** Insert ngram into database and sets its count.
      */
-    void insertNgram(const Ngram ngram, const int count) const;
+    void insertNgram(const Ngram ngram, const int count);
 
     /** Updates ngram count.
      */
-    void updateNgram(const Ngram ngram, const int count) const;
+    void updateNgram(const Ngram ngram, const int count);
 
     /** Removes the ngram from the database
      */
@@ -164,6 +164,8 @@ private:
     std::string database_filename;
     size_t cardinality;
     bool read_write_mode;
+
+    int unigram_counts_sum;
 
 };
 
