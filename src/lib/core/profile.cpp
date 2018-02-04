@@ -81,11 +81,8 @@ void Profile::visit_node(Configuration* configuration,
 	    // if element contains text, we have a value for our
 	    // config variable, so add it to our configuration
 	    const char* text = element->GetText();
-	    if (text) {
-                configuration->insert (Variable::vector_to_string(variable), text);
-
+        configuration->insert (Variable::vector_to_string(variable), text);
 		//std::cerr << "[Profile] Inserted variable: " << Variable::vector_to_string(variable) << " = " << text << std::endl;
-	    }
 	}
 
 	// then descend down the tree

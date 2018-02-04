@@ -113,14 +113,6 @@ Profile* ProfileManager::create_profile_from_xml (const std::string& filename)
 void ProfileManager::init_profiles (const std::string& profilename)
 {
     std::list<std::string> profiles;
-
-    {
-        // load default profile values
-        DefaultProfile default_profile ("");
-	default_profile.read_into_configuration (config);
-    }
-
-
     // system etc directory
     profiles.push_back (get_system_etc_dir() + '/' + DefaultProfile::DEFAULT_PROFILE_FILENAME);
     // installation config directory
