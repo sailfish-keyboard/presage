@@ -20,7 +20,7 @@ Version:        0.9.1
 Release:        7.29
 Summary:        Intelligent predictive text entry platform (tools and demos)
 License:        GPL-2.0
-Group:          Productivity/Text/Utilities
+Group:          Applications/Productivity
 Url:            http://presage.sourceforge.net
 Source:         http://ncu.dl.sourceforge.net/project/%{name}/%{name}/%{version}/%{name}-%{version}.tar.gz
 
@@ -44,7 +44,7 @@ This package also contains simple demonstration programs and simulator.
 
 %package -n libpresage-devel
 Summary:        Intelligent predictive text entry platform (development files)
-Group:          Development/Libraries/C and C++
+Group:          Development/Libraries
 Requires:       %{name} = %{version}
 Requires:       libpresage1 = %{version}
 
