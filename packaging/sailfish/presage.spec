@@ -45,8 +45,6 @@ This package also contains simple demonstration programs and simulator.
 %package -n libpresage-devel
 Summary:        Intelligent predictive text entry platform (development files)
 Group:          Development/Libraries
-Requires:       %{name} = %{version}
-Requires:       libpresage1 = %{version}
 
 %description -n libpresage-devel
 Presage is an intelligent predictive text entry platform.
@@ -99,6 +97,8 @@ Documentation is available in HTML and LaTeX format.
 
 %build
 autoreconf -fi
+CFLAGS="$CFLAGS -fPIC"
+CXXFLAGS="$CXXFLAGS -fPIC"
 %configure --disable-python-binding --disable-gpresagemate --disable-gprompter --disable-documentation
 make %{?_smp_mflags}
 
