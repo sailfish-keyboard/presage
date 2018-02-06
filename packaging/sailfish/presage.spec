@@ -122,6 +122,8 @@ echo "CREATE TABLE _2_gram (word_1 TEXT, word TEXT, count INTEGER, UNIQUE(word_1
 echo "CREATE TABLE _3_gram (word_2 TEXT, word_1 TEXT, word TEXT, count INTEGER, UNIQUE(word_2, word_1, word) );" | sqlite3 %{buildroot}%{_datadir}/presage/database_empty.db
 
 # cp SFOS config over
+ls
+ls packaging
 cp rpm/presage.xml %{buildroot}%{_sysconfdir}/presage.xml
 
 %post -n libpresage1 -p /sbin/ldconfig
