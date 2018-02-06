@@ -78,7 +78,7 @@
         <DefaultSmoothedNgramPredictor>
             <PREDICTOR>SmoothedNgramPredictor</PREDICTOR>
             <LOGGER>ERROR</LOGGER>
-            <DBFILENAME>/usr/share/presage/database_empty.sqlite</DBFILENAME>
+            <DBFILENAME>/usr/share/presage/database_empty.db</DBFILENAME>
             <!-- delta_0, delta_1, ..., delta_{n-1}
 		 Deltas also control the value of n in the n-gram model.
 	    -->
