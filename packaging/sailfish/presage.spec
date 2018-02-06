@@ -24,11 +24,10 @@ Group:          Applications/Productivity
 Url:            http://presage.sourceforge.net
 Source:         http://ncu.dl.sourceforge.net/project/%{name}/%{name}/%{version}/%{name}-%{version}.tar.gz
 
-BuildRequires:  sqlite-devel
 BuildRequires:  desktop-file-utils
+BuildRequires:  sqlite
 BuildRequires:  sqlite-devel
 BuildRequires:  doxygen
-BuildRequires:  fdupes
 BuildRequires:  gcc-c++
 BuildRequires:  help2man
 BuildRequires:  libtool
@@ -117,8 +116,13 @@ make install DESTDIR=%{buildroot}
 %{__rm} %{buildroot}%{_datadir}/presage/presage.xpm
 %{__rm} %{buildroot}%{_datadir}/presage/python_binding.txt
 
+# create empty database used in the default configuration
+echo "CREATE TABLE _1_gram (word TEXT, count INTEGER, UNIQUE(word) );" | sqlite3 %{buildroot}%{_datadir}/presage/database_empty.db
+echo "CREATE TABLE _2_gram (word_1 TEXT, word TEXT, count INTEGER, UNIQUE(word_1, word) );" | sqlite3 %{buildroot}%{_datadir}/presage/database_empty.db
+echo "CREATE TABLE _3_gram (word_2 TEXT, word_1 TEXT, word TEXT, count INTEGER, UNIQUE(word_2, word_1, word) );" | sqlite3 %{buildroot}%{_datadir}/presage/database_empty.db
 
-#%fdupes %{buildroot}
+# cp SFOS config over
+cp packaging/sailfish/presage.xml %{buildroot}%{_sysconfdir}/presage.xml
 
 %post -n libpresage1 -p /sbin/ldconfig
 
@@ -150,6 +154,7 @@ make install DESTDIR=%{buildroot}
 %files -n presage-data
 %defattr(-,root,root)
 %config %{_sysconfdir}/presage.xml
+%{_datadir}/presage/database_empty.db
 #%exclude %{_datadir}/presage
 #%exclude %{_datadir}/presage/getting_started.txt
 
