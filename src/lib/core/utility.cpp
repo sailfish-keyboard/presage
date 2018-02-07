@@ -36,6 +36,12 @@
 # include <sys/stat.h>
 #endif
 
+// use istringstream for conversion of string to double
+// in locale independent manner
+#include <sstream>
+#include <locale>
+
+
 /** Convert string to lower case
  *
  */
@@ -257,7 +263,12 @@ bool Utility::isNo(const std::string& str)
  */
 double Utility::toDouble(const std::string str)
 {
-    return atof(str.c_str());
+    std::istringstream istr(str);
+    istr.imbue(std::locale("C"));
+
+    double res;
+    istr >> res;
+    return res;
 }
 
 /** Convert string to int.
