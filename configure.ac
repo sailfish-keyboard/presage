@@ -202,6 +202,19 @@ AM_CONDITIONAL([USE_SQLITE], [test "x$use_sqlite" = "xyes"])
 
 
 dnl ==================
+dnl Checks for MARISA
+dnl ==================
+AC_CHECK_HEADERS([marisa.h],
+                 [have_marisa_header=true],
+                 [AC_MSG_WARN([MARISA header file not found.])],
+                 [])
+AM_CONDITIONAL([HAVE_MARISA], [test "x$have_marisa_header" = "xtrue"])
+if test "x$have_marisa_header" = "xtrue"
+then
+AC_SUBST([MARISA_LIBS], ["-lmarisa"])
+fi
+
+dnl ==================
 dnl Checks for CppUnit
 dnl ==================
 AM_PATH_CPPUNIT([1.9.6],

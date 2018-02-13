@@ -21,14 +21,19 @@
 
 ## Process this file with automake to produce Makefile.in
 
+libdbconnector_la_LIBADD =	$(MARISA_LIBS)
+
 if USE_SQLITE
 
 noinst_LTLIBRARIES =	libdbconnector.la
 
 libdbconnector_la_SOURCES =	databaseConnector.cpp             \
 				databaseConnector.h               \
+				trieDatabaseConnector.h    \
+				trieDatabaseConnector.cpp  \
 				sqliteDatabaseConnector.cpp       \
 				sqliteDatabaseConnector.h         
-libdbconnector_la_LIBADD =	$(SQLITE_LIBS)
+libdbconnector_la_LIBADD +=	$(SQLITE_LIBS) 
 
 endif
+

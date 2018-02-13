@@ -50,7 +50,9 @@ libpredictors_la_LIBADD =	$(PREDICTORS) $(DBCONNECTOR)
 libpredictor_la_SOURCES =	predictor.cpp predictor.h
 
 libSmoothedNgramPredictor_la_SOURCES =	smoothedNgramPredictor.cpp \
-					smoothedNgramPredictor.h   
+					smoothedNgramPredictor.h   \
+					smoothedNgramTriePredictor.cpp \
+					smoothedNgramTriePredictor.h
 
 libAbbreviationExpansionPredictor_la_SOURCES =	abbreviationExpansionPredictor.h   \
 						abbreviationExpansionPredictor.cpp 
