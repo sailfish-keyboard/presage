@@ -1,5 +1,4 @@
-Presage
-=======
+# Presage
 
 This is a fork of [Presage](http://presage.sourceforge.net/) developed further 
 to incorporate into Sailfish OS keyboard as a prediction module.
@@ -26,3 +25,26 @@ Main changes:
   
 See upstream (README)[https://github.com/rinigus/presage/blob/master/README] for general introduction
 and build instructions.
+
+
+## Generation of n-gram database for MARISA-based predictor
+
+To generate n-gram database for MARISA-based predictor, make SQLite
+based n-gram database first. For that, use the provided `text2ngram`
+utility and build sequential n-gram tables in SQLite format. For example
+
+```
+for i in 1 2 3; do text2ngram  -n $i -l -f sqlite -o database_aa.db mytext.filtered; done
+```
+
+will generate database covering 1, 2, and 3-gram cases. 
+
+With SQLite database ready, run Python script `utils/sqlite2marisa.py`
+to convert n-gram database. For example
+
+```
+utils/sqlite2marisa.py database_aa.db database_aa
+```
+
+If needed, MARISA database can be reduced by cutting off n-grams using
+threshold command line option of the converter.
