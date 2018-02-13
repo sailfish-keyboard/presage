@@ -98,7 +98,7 @@ Documentation is available in HTML and LaTeX format.
 %build
 autoreconf -fi
 CFLAGS="$CFLAGS -fPIC"
-CXXFLAGS="$CXXFLAGS -fPIC"
+CXXFLAGS="$CXXFLAGS -fPIC -std=c++11"
 %configure --disable-python-binding --disable-gpresagemate --disable-gprompter --disable-documentation
 make %{?_smp_mflags}
 
