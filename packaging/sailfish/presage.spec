@@ -32,6 +32,7 @@ BuildRequires:  gcc-c++
 BuildRequires:  help2man
 BuildRequires:  libtool
 BuildRequires:  ncurses-devel
+BuildRequires:  libmarisa-devel
 BuildRoot:      %{_tmppath}/%{name}-%{version}-root
 
 %description
