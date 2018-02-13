@@ -11,7 +11,7 @@ All changes introduced in the fork are listed at https://github.com/rinigus/pres
 Main changes:
 
 * Addition of
-  (MARISA)(http://s-yata.github.io/marisa-trie/docs/readme.en.html)-based
+  [MARISA](http://s-yata.github.io/marisa-trie/docs/readme.en.html)-based
   Predictor. Compared to SQLite-backed predictor, MARISA-based
   predictor is much faster and requires several times smaller
   databases
@@ -23,7 +23,7 @@ Main changes:
   performed in "C" locale
   
   
-See upstream (README)[https://github.com/rinigus/presage/blob/master/README] for general introduction
+See upstream [README](https://github.com/rinigus/presage/blob/master/README) for general introduction
 and build instructions.
 
 

@@ -25,6 +25,7 @@ stamp-h1
 libtool
 test-driver
 config.*
+*~
 .libs
 .directory
 pps/python/build
