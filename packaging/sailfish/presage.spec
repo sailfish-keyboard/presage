@@ -33,7 +33,9 @@ BuildRequires:  help2man
 BuildRequires:  libtool
 BuildRequires:  ncurses-devel
 BuildRequires:  libmarisa-devel
+BuildRequires:  libmarisa
 BuildRoot:      %{_tmppath}/%{name}-%{version}-root
+Requires:       libpresage1
 
 %description
 Presage is an intelligent predictive text entry platform.
@@ -57,6 +59,7 @@ This package contains the header files needed to compile applications or shared 
 Summary:        Intelligent predictive text entry platform (shared library)
 Group:          System/Libraries
 Requires:       presage-data
+Requires:       libmarisa
 
 %description -n libpresage1
 Presage is an intelligent predictive text entry platform.
