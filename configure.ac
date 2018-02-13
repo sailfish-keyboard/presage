@@ -41,6 +41,7 @@ m4_ifdef([AM_PROG_AR], [AM_PROG_AR])
 AC_LANG([C++])
 
 AM_CONDITIONAL([USE_GCC], [test "x$GCC" = "xyes"])
+AX_CXX_COMPILE_STDCXX_11(,[mandatory])
 
 dnl ==================
 dnl Checks for libtool
