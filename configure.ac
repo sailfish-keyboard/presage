@@ -41,7 +41,12 @@ m4_ifdef([AM_PROG_AR], [AM_PROG_AR])
 AC_LANG([C++])
 
 AM_CONDITIONAL([USE_GCC], [test "x$GCC" = "xyes"])
-AX_CXX_COMPILE_STDCXX_11(,[mandatory])
+
+# SFOS seems to have old autotools packages, adding option manually.
+# When ready, replace AX_CHECK_COMPILE_FLAG with AX_CXX_COMPILE_STDCXX_11
+#AX_CXX_COMPILE_STDCXX_11(,[mandatory])
+AX_CHECK_COMPILE_FLAG([-std=c++11], [
+                        CXXFLAGS="$CXXFLAGS -std=c++11"])
 
 dnl ==================
 dnl Checks for libtool
