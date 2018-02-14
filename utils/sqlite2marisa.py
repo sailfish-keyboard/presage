@@ -44,6 +44,19 @@ factor = max(args.threshold,1)
 conn = sqlite3.connect(args.sqlite_input)
 db = conn.cursor()
 
+# get sum
+scount = db.execute("SELECT SUM(count) AS s FROM _1_gram WHERE count>?", (args.threshold,)).fetchone()[0]
+print("Sum of 1-gram:", scount)
+if factor > 1:
+    scount = int(scount/factor)
+    print("Normalized sum of 1-gram:", scount)
+    
+if scount > 2**31:
+    print("Trouble: sum of 1-grams doesn't fit INT32. Please normalize the data manually or automatically by increasing threshold for counts")
+    sys.exit(-1)
+
+
+# load ngrams
 keyset = marisa.Keyset()
 data = {}
 
@@ -75,7 +88,8 @@ while cont:
         keyset.push_back(k)
 
     ngram += 1
-        
+
+# save ngrams
 print('Data loaded, saving')
 
 trie = marisa.Trie()
@@ -85,18 +99,7 @@ trie.save(os.path.join(args.output, "ngrams.trie"))
 print("Keys: ", trie.num_keys())
 
 arr = np.zeros(trie.num_keys()+1, dtype=np.int32)
-s = db.execute("SELECT SUM(count) AS s FROM _1_gram WHERE count>?", (args.threshold,)).fetchone()[0]
-print("Sum of 1-gram:", s)
-if factor > 1:
-    s = int(s/factor)
-    print("Normalized sum of 1-gram:", s)
-    
-if s > 2**31:
-    print("Trouble: sum of 1-grams doesn't fit INT32. Please normalize the data manually or automatically by increasing threshold for counts")
-    sys.exit(-1)
-
-arr[0] = s
-    
+arr[0] = scount
 agent = marisa.Agent()
 for k in data:
     agent.set_query(k)
