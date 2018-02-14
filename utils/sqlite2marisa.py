@@ -28,14 +28,23 @@ parser.add_argument('output', type=str,
 parser.add_argument('--threshold', type=int, default=0,
                     help='Minimal n-gram counts propagated into the database. Default 0 (all recorded n-grams are propagated into MARISA-based database)')
 
+parser.add_argument('--overwrite', action="store_true",
+                    help='Overwrite existing MARISA database')
+
+
+
 args = parser.parse_args()
 
 if os.path.exists(args.output):
-    print('Cannot write MARISA database into existing directory %s' % args.output)
-    print('Please provide path for directory that will be created by this script')
-    sys.exit(-1)
+    if args.overwrite:
+        print('\nGoing to overwrite existing MARISA trie database\n')
+    else:
+        print('Cannot write MARISA database into existing directory %s' % args.output)
+        print('Please provide path for directory that will be created by this script')
+        sys.exit(-1)
 
-os.makedirs(args.output)
+else:
+    os.makedirs(args.output)
 
 factor = max(args.threshold,1)
 
@@ -46,7 +55,7 @@ db = conn.cursor()
 
 # get sum
 scount = db.execute("SELECT SUM(count) AS s FROM _1_gram WHERE count>?", (args.threshold,)).fetchone()[0]
-print("Sum of 1-gram:", scount)
+print("\nSum of 1-gram:", scount)
 if factor > 1:
     scount = int(scount/factor)
     print("Normalized sum of 1-gram:", scount)
@@ -55,6 +64,7 @@ if scount > 2**31:
     print("Trouble: sum of 1-grams doesn't fit INT32. Please normalize the data manually or automatically by increasing threshold for counts")
     sys.exit(-1)
 
+print()
 
 # load ngrams
 keyset = marisa.Keyset()
@@ -72,6 +82,13 @@ while cont:
         break
 
     print('Loading n-gram:', ngram)
+    print('Number of n-grams to load:',
+          db.execute("SELECT COUNT(*) AS s FROM " + tname + " WHERE count>?", (args.threshold,)).fetchone()[0])
+    print('Range of n-gram counts:',
+          db.execute("SELECT MAX(count) AS s FROM " + tname + " WHERE count>?", (args.threshold,)).fetchone()[0],
+          db.execute("SELECT MIN(count) AS s FROM " + tname + " WHERE count>?", (args.threshold,)).fetchone()[0])
+    print()
+          
     
     select = 'SELECT count,word'
     for i in range(ngram-1):
@@ -96,7 +113,7 @@ trie = marisa.Trie()
 trie.build(keyset)
 trie.save(os.path.join(args.output, "ngrams.trie"))
 
-print("Keys: ", trie.num_keys())
+print("Keys: ", trie.num_keys(), "\n")
 
 arr = np.zeros(trie.num_keys()+1, dtype=np.int32)
 arr[0] = scount
