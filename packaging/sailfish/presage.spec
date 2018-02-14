@@ -120,13 +120,15 @@ make install DESTDIR=%{buildroot}
 %{__rm} %{buildroot}%{_datadir}/presage/presage.xpm
 %{__rm} %{buildroot}%{_datadir}/presage/python_binding.txt
 
-# create empty database used in the default configuration
-echo "CREATE TABLE _1_gram (word TEXT, count INTEGER, UNIQUE(word) );" | sqlite3 %{buildroot}%{_datadir}/presage/database_empty.db
-echo "CREATE TABLE _2_gram (word_1 TEXT, word TEXT, count INTEGER, UNIQUE(word_1, word) );" | sqlite3 %{buildroot}%{_datadir}/presage/database_empty.db
-echo "CREATE TABLE _3_gram (word_2 TEXT, word_1 TEXT, word TEXT, count INTEGER, UNIQUE(word_2, word_1, word) );" | sqlite3 %{buildroot}%{_datadir}/presage/database_empty.db
+# # create empty database used in the default configuration
+# echo "CREATE TABLE _1_gram (word TEXT, count INTEGER, UNIQUE(word) );" | sqlite3 %{buildroot}%{_datadir}/presage/database_empty.db
+# echo "CREATE TABLE _2_gram (word_1 TEXT, word TEXT, count INTEGER, UNIQUE(word_1, word) );" | sqlite3 %{buildroot}%{_datadir}/presage/database_empty.db
+# echo "CREATE TABLE _3_gram (word_2 TEXT, word_1 TEXT, word TEXT, count INTEGER, UNIQUE(word_2, word_1, word) );" | sqlite3 %{buildroot}%{_datadir}/presage/database_empty.db
 
-# cp SFOS config over
+# cp SFOS config and empty databases
 cp packaging/sailfish/presage.xml %{buildroot}%{_sysconfdir}/presage.xml
+cp packaging/sailfish/database_empty.db %{buildroot}%{_datadir}/presage/
+cp -r packaging/sailfish/database_empty %{buildroot}%{_datadir}/presage/
 
 %post -n libpresage1 -p /sbin/ldconfig
 
@@ -159,6 +161,9 @@ cp packaging/sailfish/presage.xml %{buildroot}%{_sysconfdir}/presage.xml
 %defattr(-,root,root)
 %config %{_sysconfdir}/presage.xml
 %{_datadir}/presage/database_empty.db
+%{_datadir}/presage/database_empty/ngrams.trie
+%{_datadir}/presage/database_empty/ngrams.counts
+
 #%exclude %{_datadir}/presage
 #%exclude %{_datadir}/presage/getting_started.txt
 

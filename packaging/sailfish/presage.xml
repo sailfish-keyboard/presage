@@ -5,7 +5,7 @@
         <!-- PREDICTORS
 	     Space separated list of predictors to use to generate predictions
         -->
-        <PREDICTORS>DefaultSmoothedNgramPredictor UserSmoothedNgramPredictor DefaultRecencyPredictor</PREDICTORS>
+        <PREDICTORS>DefaultSmoothedNgramTriePredictor UserSmoothedNgramPredictor DefaultRecencyPredictor</PREDICTORS>
     </PredictorRegistry>
     <ContextTracker>
         <LOGGER>ERROR</LOGGER>
@@ -38,7 +38,7 @@
 	     Allow the same suggestion to be offered in subsequent
 	     predictions, even if no context change has been detected.
         -->
-        <REPEAT_SUGGESTIONS>no</REPEAT_SUGGESTIONS>
+        <REPEAT_SUGGESTIONS>yes</REPEAT_SUGGESTIONS>
         <!-- GREEDY_SUGGESTION_THRESHOLD
 	     Select only tokens whose completion length is greater than
 	     the specified greedy suggestion threshold.
@@ -89,6 +89,19 @@
                 <LOGGER>ERROR</LOGGER>
             </DatabaseConnector>
         </DefaultSmoothedNgramPredictor>
+        <DefaultSmoothedNgramTriePredictor>
+            <PREDICTOR>SmoothedNgramTriePredictor</PREDICTOR>
+            <LOGGER>ERROR</LOGGER>
+            <DBFILENAME>/usr/share/presage/database_empty</DBFILENAME>
+            <!-- delta_0, delta_1, ..., delta_{n-1}
+		 Deltas also control the value of n in the n-gram model.
+	    -->
+            <DELTAS>0.01 0.1 0.89</DELTAS>
+            <COUNT_THRESHOLD>0</COUNT_THRESHOLD>
+            <DatabaseConnector>
+                <LOGGER>ERROR</LOGGER>
+            </DatabaseConnector>
+        </DefaultSmoothedNgramTriePredictor>
         <UserSmoothedNgramPredictor>
             <PREDICTOR>SmoothedNgramPredictor</PREDICTOR>
             <LOGGER>ERROR</LOGGER>

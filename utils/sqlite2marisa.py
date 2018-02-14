@@ -55,6 +55,9 @@ db = conn.cursor()
 
 # get sum
 scount = db.execute("SELECT SUM(count) AS s FROM _1_gram WHERE count>?", (args.threshold,)).fetchone()[0]
+if scount is None:
+    scount = 1 # setting 1 as minimum
+    
 print("\nSum of 1-gram:", scount)
 if factor > 1:
     scount = int(scount/factor)
