@@ -48,3 +48,35 @@ utils/sqlite2marisa.py database_aa.db database_aa
 
 If needed, MARISA database can be reduced by cutting off n-grams using
 threshold command line option of the converter.
+
+Note that endianness of the system generating the database and
+the device on which you plan to use it should be the same.
+
+
+### Packaging for Sailfish OS
+
+As soon as the database is ready, it is easy to package it for
+Sailfish by using a provided script
+`packaging/sailfish/package-language.sh` . For that, you need Linux PC
+with `rpmbuild` and `sed` installed in the path. Note that `rpmbuild` is available
+for Linux distributions that don't use RPMs for native packaging. 
+
+To create RPM with Presage language support, run
+
+```
+packaging/sailfish/package-language.sh Language langcode database-directory version
+```
+
+where 
+
+* Language: Specify language in English starting with the capital letter, ex 'Estonian'
+* langcode: Specify language two-letter code, ex 'et'
+* database-directory: Directory path with the MARISA-formatted database
+* version: Version of the language package, ex '1.0.0'
+
+When finished, language support will be packaged into RPM in the current directory. For example, 
+Estonian database is packaged using
+
+```
+packaging/sailfish/package-language.sh Estonian et database_et 1.0.0
+```
