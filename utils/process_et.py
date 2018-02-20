@@ -1,17 +1,19 @@
+# -*- coding: utf-8 -*-
+
 import nltk, string, codecs
 from nltk.util import ngrams
 from nltk.corpus import words
-from treebank_nocont import TreebankWordTokenizerNoContract
 from collections import defaultdict
 from progress_bar import progress_bar
 
 ############################################
-CorpusFName = 'corpus.txt'
+CorpusFName = 'ettenten.txt.filtered'
+#CorpusFName = 'small.txt'
 
 # NGram output
 NGramFile = CorpusFName + ".ngram-txt"
 
-lang = 'english'
+lang = 'estonian'
 
 NGrams = 3
 verbose = False
@@ -19,10 +21,10 @@ verbose = False
 punctiation = set(string.punctuation)
 
 # language specific: allowed chars
-accepted_chars = set(".'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz")
+accepted_chars = set("AaBbDdEeFfGgHhIiJjKkLlMmNnOoPpRrSsŠšZzŽžTtUuVvÕõÄäÖöÜüCcQqWwXxYy")
 
 def allowed(word):
-    return set(word) <= accepted_chars
+    return len(word) > 1 and set(word) <= accepted_chars
 
 # load corpus into RAM
 print('Loading corpus')
@@ -30,7 +32,7 @@ print('Loading corpus')
 txt = codecs.open(CorpusFName, encoding='utf-8').read()
 
 # select word tokenizer
-tokenizer = TreebankWordTokenizerNoContract()
+#tokenizer = TreebankWordTokenizerNoContract()
 
 # split text into sentences
 print ('Splitting to sentences')
@@ -41,8 +43,7 @@ Counts = defaultdict(int)
 lines = 0
 nlines = len(sents)
 for s in sents:
-    tokens = tokenizer.tokenize(s)
-    #tokens = nltk.word_tokenize(s)
+    tokens = nltk.word_tokenize(s)
 
     # drop tokens that are punctuation symbols only
     keep = []
