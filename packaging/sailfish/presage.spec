@@ -34,6 +34,7 @@ BuildRequires:  libtool
 BuildRequires:  ncurses-devel
 BuildRequires:  libmarisa-devel
 BuildRequires:  libmarisa
+BuildRequires:  hunspell-devel
 BuildRoot:      %{_tmppath}/%{name}-%{version}-root
 Requires:       libpresage1
 
