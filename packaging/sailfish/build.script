@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# script to make OBS happy
+
+cd ~/rpmbuild
+mkdir -p RPMS/noarch/
+
+echo "copying SOURCES/*rpm to RPMS/noarch/"
+cp SOURCES/*rpm RPMS/noarch/
