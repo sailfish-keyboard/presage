@@ -16,6 +16,10 @@ Main changes:
   predictor is much faster and requires several times smaller
   databases
   
+* Addition of
+  [Hunspell](https://github.com/hunspell)
+  Predictor.
+  
 * Fixes required to make it work on Sailfish OS (loading empty
   configurations and others)
   

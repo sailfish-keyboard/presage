@@ -89,6 +89,20 @@
                 <LOGGER>ERROR</LOGGER>
             </DatabaseConnector>
         </DefaultSmoothedNgramPredictor>
+        <DefaultSmoothedNgramTriePredictor>
+            <PREDICTOR>SmoothedNgramPredictor</PREDICTOR>
+            <LOGGER>ERROR</LOGGER>
+            <DBFILENAME>::PACKAGEDATADIR::/database_en</DBFILENAME>
+            <!-- delta_0, delta_1, ..., delta_{n-1}
+		 Deltas also control the value of n in the n-gram model.
+	    -->
+            <DELTAS>0.01 0.1 0.89</DELTAS>
+            <COUNT_THRESHOLD>0</COUNT_THRESHOLD>
+            <LEARN>false</LEARN>
+            <DatabaseConnector>
+                <LOGGER>ERROR</LOGGER>
+            </DatabaseConnector>
+        </DefaultSmoothedNgramTriePredictor>
         <UserSmoothedNgramPredictor>
             <PREDICTOR>SmoothedNgramPredictor</PREDICTOR>
             <LOGGER>ERROR</LOGGER>
@@ -121,6 +135,14 @@
             <!-- fixed probability assigned to prediction -->
             <PROBABILITY>0.000001</PROBABILITY>
         </DefaultDictionaryPredictor>
+        <DefaultHunspellPredictor>
+            <PREDICTOR>HunspellPredictor</PREDICTOR>
+            <LOGGER>ERROR</LOGGER>
+            <AFFIX>/usr/share/hunspell/en_US.aff</AFFIX>
+            <DICTIONARY>/usr/share/hunspell/en_US.dic</DICTIONARY>
+            <!-- fixed probability assigned to prediction -->
+            <PROBABILITY>0.000001</PROBABILITY>
+        </DefaultHunspellPredictor>
         <DefaultAbbreviationExpansionPredictor>
             <PREDICTOR>AbbreviationExpansionPredictor</PREDICTOR>
             <LOGGER>ERROR</LOGGER>

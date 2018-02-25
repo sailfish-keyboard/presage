@@ -27,6 +27,7 @@ PREDICTORS = \
 	libpredictor.la \
 	libDummyPredictor.la \
 	libDictionaryPredictor.la \
+	libHunspellPredictor.la \
 	libAbbreviationExpansionPredictor.la \
 	libRecencyPredictor.la \
 	libDejavuPredictor.la \
@@ -59,6 +60,11 @@ libAbbreviationExpansionPredictor_la_SOURCES =	abbreviationExpansionPredictor.h 
 
 libDictionaryPredictor_la_SOURCES =	dictionaryPredictor.cpp \
 					dictionaryPredictor.h      
+
+libHunspellPredictor_la_SOURCES =	hunspellPredictor.cpp \
+					hunspellPredictor.h      
+
+libHunspellPredictor_la_LIBADD =	$(HUNSPELL_LIBS)
 
 libDummyPredictor_la_SOURCES =		dummyPredictor.cpp \
 					dummyPredictor.h           
