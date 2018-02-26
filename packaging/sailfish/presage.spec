@@ -22,7 +22,8 @@ Summary:        Intelligent predictive text entry platform (tools and demos)
 License:        GPL-2.0
 Group:          Applications/Productivity
 Url:            http://presage.sourceforge.net
-Source:         http://ncu.dl.sourceforge.net/project/%{name}/%{name}/%{version}/%{name}-%{version}.tar.gz
+#Source:         http://ncu.dl.sourceforge.net/project/%{name}/%{name}/%{version}/%{name}-%{version}.tar.gz
+Source0:        %{name}-%{version}.tar.bz2
 
 BuildRequires:  desktop-file-utils
 BuildRequires:  sqlite
@@ -34,7 +35,7 @@ BuildRequires:  libtool
 BuildRequires:  ncurses-devel
 BuildRequires:  libmarisa-devel
 BuildRequires:  libmarisa
-BuildRequires:  hunspell-devel
+BuildRequires:  hunspell-devel >= 1.5.1
 BuildRoot:      %{_tmppath}/%{name}-%{version}-root
 Requires:       libpresage1
 
