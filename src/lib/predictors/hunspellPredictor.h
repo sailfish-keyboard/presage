@@ -27,14 +27,6 @@
 #ifndef PRESAGE_HUNSPELLPREDICTOR
 #define PRESAGE_HUNSPELLPREDICTOR
 
-#ifdef HAVE_CONFIG_H
-# include "config.h"
-#endif
-
-#ifndef HAVE_HUNSPELL_HUNSPELL_HXX
-#error "Requires Hunspell library"
-#endif
-
 #include "predictor.h"
 #include "../core/dispatcher.h"
 
