@@ -36,6 +36,7 @@ BuildRequires:  ncurses-devel
 BuildRequires:  libmarisa-devel
 BuildRequires:  libmarisa
 BuildRequires:  hunspell-devel >= 1.5.1
+BuildRequires:  hunspell >= 1.5.1
 BuildRoot:      %{_tmppath}/%{name}-%{version}-root
 Requires:       libpresage1
 
