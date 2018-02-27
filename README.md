@@ -121,14 +121,14 @@ Generated n-gram text file can be converted into MARISA database using
 
 As soon as the database is ready, it is easy to package it for
 Sailfish by using a provided script
-`packaging/sailfish/language/package-language.sh` . For that, you need Linux PC
+`packaging/sailfish-language/package-language.sh` . For that, you need Linux PC
 with `rpmbuild` and `sed` installed in the path. Note that `rpmbuild` is available
 for Linux distributions that don't use RPMs for native packaging. 
 
 To create RPM with Presage language support, run
 
 ```
-packaging/sailfish/language/package-language.sh Language langcode database-directory version
+packaging/sailfish-language/package-language.sh Language langcode database-directory version
 ```
 
 where 
@@ -142,5 +142,5 @@ When finished, language support will be packaged into RPM in the current directo
 Estonian database is packaged using
 
 ```
-packaging/sailfish/language/package-language.sh Estonian et database_et 1.0.0
+packaging/sailfish-language/package-language.sh Estonian et database_et 1.0.0
 ```
