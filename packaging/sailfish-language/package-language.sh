@@ -8,7 +8,7 @@ if [ "$#" -ne 4 ]; then
     echo "Usage: $0 Language langcode database-directory version"
     echo
     echo "Language: Specify language in English starting with the capital letter, ex 'Estonian'"
-    echo "langcode: Specify language two-letter code, ex 'et'"
+    echo "langcode: Specify language code, ex 'en_US'. Use the same notation as Hunspell dictionaries."
     echo "database-directory: Directory path with the MARISA-formatted database"
     echo "version: Version of the language package, ex '1.0.0'"
     echo

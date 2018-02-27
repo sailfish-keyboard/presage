@@ -134,7 +134,7 @@ packaging/sailfish-language/package-language.sh Language langcode database-direc
 where 
 
 * Language: Specify language in English starting with the capital letter, ex 'Estonian'
-* langcode: Specify language two-letter code, ex 'et'
+* langcode: Specify language code in the same notation as Hunspell, ex 'en_US'.
 * database-directory: Directory path with the MARISA-formatted database
 * version: Version of the language package, ex '1.0.0'
 
@@ -142,5 +142,5 @@ When finished, language support will be packaged into RPM in the current directo
 Estonian database is packaged using
 
 ```
-packaging/sailfish-language/package-language.sh Estonian et database_et 1.0.0
+packaging/sailfish-language/package-language.sh Estonian et_EE database_et 1.0.0
 ```
