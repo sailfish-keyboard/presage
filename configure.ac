@@ -221,15 +221,6 @@ fi
 dnl ==================
 dnl Checks for HUNSPELL
 dnl ==================
-dnl AC_CHECK_HEADERS([hunspell/hunspell.hxx],
-dnl                  [have_hunspell_header=true],
-dnl                  [AC_MSG_WARN([Hunspell header file not found.])],
-dnl                  [])
-dnl AM_CONDITIONAL([HAVE_HUNSPELL], [test "x$have_hunspell_header" = "xtrue"])
-dnl if test "x$have_hunspell_header" = "xtrue"
-dnl then
-dnl AC_SUBST([HUNSPELL_LIBS], ["-lhunspell"])
-dnl fi
 PKG_CHECK_MODULES([HUNSPELL], [hunspell >= 1.5.1])
 
 
