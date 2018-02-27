@@ -144,3 +144,11 @@ Estonian database is packaged using
 ```
 packaging/sailfish-language/package-language.sh Estonian et_EE database_et 1.0.0
 ```
+
+
+It is also possible to use a script
+`packaging/sailfish-language/package-hunspell.sh` to provide Hunspell
+dictionaries. For that, use this script to package affix and
+dictionary file in a way that owill make it simple to use by any
+Hunspell library using application, including Presage Hunspell
+predictor. See script help for details.
