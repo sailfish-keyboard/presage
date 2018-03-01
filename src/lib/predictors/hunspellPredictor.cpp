@@ -132,8 +132,6 @@ Prediction HunspellPredictor::predict(const size_t max_partial_predictions_size,
 
 void HunspellPredictor::learn(const std::vector<std::string>& change)
 {
-    std::cout << "HunspellPredictor::learn() method called" << std::endl;
-    std::cout << "HunspellPredictor::learn() method exited" << std::endl;
 }
 
 void HunspellPredictor::update (const Observable* var)
