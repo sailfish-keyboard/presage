@@ -145,8 +145,31 @@ Estonian database is packaged using
 packaging/sailfish-language/package-language.sh Estonian et_EE database_et 1.0.0
 ```
 
+## Hunspell dictionaries
 
-It is also possible to use a script
+Until Presage will support fully conversion between encodings, it is
+expected that Hunspell dictionary is in the same encoding as the
+input. Hence, for Sailfish, it is recommended to convert dictionary
+into UTF8 encoding. 
+
+For that, one can use `iconv` in Linux. First, check what is the
+encoding of the dictionary by examining the first line in the affix
+file. In the case of Estonian (et_EE.aff), it is
+
+```
+SET ISO8859-15
+```
+
+Then run conversions:
+
+```
+iconv -f ISO-8859-15 -t UTF8 /usr/share/hunspell/et_EE.aff -o et_EE.aff
+iconv -f ISO-8859-15 -t UTF8 /usr/share/hunspell/et_EE.dic -o et_EE.dic
+```
+
+and in the new affix file replace the first line with `SET UTF-8`.
+
+After conversion, it is also possible to use a script
 `packaging/sailfish-language/package-hunspell.sh` to provide Hunspell
 dictionaries. For that, use this script to package affix and
 dictionary file in a way that owill make it simple to use by any

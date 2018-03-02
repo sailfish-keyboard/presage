@@ -51,8 +51,7 @@ public:
 
     virtual void update (const Observable* variable);
 
-    void set_affix (const std::string& value);
-    void set_dictionary (const std::string& value);
+    void set_dictionary_base (const std::string& value);
     void set_probability (const std::string& value);
 
 private:
@@ -60,8 +59,7 @@ private:
     
 private:
     std::string LOGGER;
-    std::string AFFIX;
-    std::string DICTIONARY;
+    std::string DICTIONARYBASE;
     std::string PROBABILITY;
 
     std::string affix_path;

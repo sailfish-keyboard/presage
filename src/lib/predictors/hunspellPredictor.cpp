@@ -38,15 +38,13 @@ HunspellPredictor::HunspellPredictor (Configuration* config, ContextTracker* ht,
 	     ),
       dispatcher (this)
 {
-    LOGGER      = PREDICTORS + name + ".LOGGER";
-    AFFIX       = PREDICTORS + name + ".AFFIX";
-    DICTIONARY  = PREDICTORS + name + ".DICTIONARY";
-    PROBABILITY = PREDICTORS + name + ".PROBABILITY";
+    LOGGER          = PREDICTORS + name + ".LOGGER";
+    DICTIONARYBASE  = PREDICTORS + name + ".DICTIONARYBASE";
+    PROBABILITY     = PREDICTORS + name + ".PROBABILITY";
 
     // build notification dispatch map
     dispatcher.map (config->find (LOGGER), & HunspellPredictor::set_logger);
-    dispatcher.map (config->find (AFFIX), & HunspellPredictor::set_affix);
-    dispatcher.map (config->find (DICTIONARY), & HunspellPredictor::set_dictionary);
+    dispatcher.map (config->find (DICTIONARYBASE), & HunspellPredictor::set_dictionary_base);
     dispatcher.map (config->find (PROBABILITY), & HunspellPredictor::set_probability);
 }
 
@@ -55,17 +53,17 @@ HunspellPredictor::~HunspellPredictor()
     // intentionally empty
 }
 
-void HunspellPredictor::set_affix (const std::string& value)
+void HunspellPredictor::set_dictionary_base (const std::string& value)
 {
-    affix_path = value;
-    logger << INFO << "AFFIX: " << value << endl;
-    load_speller();
-}
-
-void HunspellPredictor::set_dictionary (const std::string& value)
-{
-    dictionary_path = value;
-    logger << INFO << "DICTIONARY: " << value << endl;
+    if (value.empty()) {
+      affix_path = std::string();
+      dictionary_path = std::string();
+    } else {
+      affix_path = value + ".aff";
+      dictionary_path = value + ".dic";
+    }
+    
+    logger << INFO << "DICTIONARY: " << affix_path << " | "  << dictionary_path << endl;
     load_speller();
 }
 
@@ -89,13 +87,13 @@ Prediction HunspellPredictor::predict(const size_t max_partial_predictions_size,
 
     std::string prefix = contextTracker->getPrefix();
 
-    if (!hunspell)
+    if (!hunspell || prefix.empty())
       return result;
 
     unsigned int count = 0;
     if (hunspell->spell(prefix))
       {
-        logger << DEBUG << prefix << " is correct, adding as suggestion" << endl;
+        logger << DEBUG << prefix << " is correct" << endl;
         
         // correct spelling, let's add available suffixes
         result.addSuggestion(Suggestion(prefix,probability)); // add the word itself
