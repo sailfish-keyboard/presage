@@ -62,7 +62,7 @@ with codecs.open(args.inputfile, encoding='utf-8') as f:
     for line in f:
         key, count = line.split('\t')
         count = int(count)
-        if count > args.threshold:
+        if count >= args.threshold:
             data[key] = count
             keyset.push_back(key)
             n = key.split()[0]
