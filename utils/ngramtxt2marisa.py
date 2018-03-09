@@ -62,7 +62,7 @@ with codecs.open(args.inputfile, encoding='utf-8') as f:
     for line in f:
         key, count = line.split('\t')
         count = int(count)
-        if count > args.threshold:
+        if count >= args.threshold:
             data[key] = count
             keyset.push_back(key)
             n = key.split()[0]
@@ -112,7 +112,7 @@ agent = marisa.Agent()
 for k in data:
     agent.set_query(k)
     trie.lookup(agent)
-    arr[ agent.key_id() + 1 ] = data[k]
+    arr[ agent.key_id() + 1 ] = int(data[k] / factor)
 
 binwrite=open(os.path.join(args.output, 'ngrams.counts'),'wb')
 arr.tofile(binwrite)

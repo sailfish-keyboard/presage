@@ -54,7 +54,7 @@ conn = sqlite3.connect(args.sqlite_input)
 db = conn.cursor()
 
 # get sum
-scount = db.execute("SELECT SUM(count) AS s FROM _1_gram WHERE count>?", (args.threshold,)).fetchone()[0]
+scount = db.execute("SELECT SUM(count) AS s FROM _1_gram WHERE count>=?", (args.threshold,)).fetchone()[0]
 if scount is None:
     scount = 1 # setting 1 as minimum
     
@@ -86,17 +86,17 @@ while cont:
 
     print('Loading n-gram:', ngram)
     print('Number of n-grams to load:',
-          db.execute("SELECT COUNT(*) AS s FROM " + tname + " WHERE count>?", (args.threshold,)).fetchone()[0])
+          db.execute("SELECT COUNT(*) AS s FROM " + tname + " WHERE count>=?", (args.threshold,)).fetchone()[0])
     print('Range of n-gram counts:',
-          db.execute("SELECT MAX(count) AS s FROM " + tname + " WHERE count>?", (args.threshold,)).fetchone()[0],
-          db.execute("SELECT MIN(count) AS s FROM " + tname + " WHERE count>?", (args.threshold,)).fetchone()[0])
+          db.execute("SELECT MAX(count) AS s FROM " + tname + " WHERE count>=?", (args.threshold,)).fetchone()[0],
+          db.execute("SELECT MIN(count) AS s FROM " + tname + " WHERE count>=?", (args.threshold,)).fetchone()[0])
     print()
           
     
     select = 'SELECT count,word'
     for i in range(ngram-1):
         select += ',word_%d' % (i+1)
-    select += ' FROM ' + tname + ' WHERE count>?'
+    select += ' FROM ' + tname + ' WHERE count>=?'
 
     for r in db.execute(select, (args.threshold,)):
         count = int(r[0]/factor)
