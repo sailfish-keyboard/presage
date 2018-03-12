@@ -48,8 +48,10 @@ PRESAGE_0.9.2 {
 global:
 	extern "C++" {
 		Presage::version*;
+		Presage::forget*;
 	};
 	presage_version;
 	presage_predict_with_filter;
 	presage_free_prediction;
+	presage_forget;
 } PRESAGE_0.9.1;

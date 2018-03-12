@@ -458,6 +458,10 @@ void ARPAPredictor::learn(const std::vector<std::string>& change)
     logger << DEBUG << "learn() method exited" << endl;
 }
 
+void ARPAPredictor::forget(const std::string& word)
+{
+}
+
 void ARPAPredictor::update (const Observable* var)
 {
     logger << DEBUG << "About to invoke dispatcher: " << var->get_name () << " - " << var->get_value() << endl;

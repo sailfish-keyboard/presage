@@ -132,6 +132,10 @@ void HunspellPredictor::learn(const std::vector<std::string>& change)
 {
 }
 
+void HunspellPredictor::forget(const std::string& word)
+{
+}
+
 void HunspellPredictor::update (const Observable* var)
 {
     logger << DEBUG << "About to invoke dispatcher: " << var->get_name () << " - " << var->get_value() << endl;

@@ -89,6 +89,11 @@ void AbbreviationExpansionPredictor::learn (const std::vector<std::string>& chan
     // intentionally empty
 }
 
+void AbbreviationExpansionPredictor::forget (const std::string& word)
+{
+    // intentionally empty
+}
+
 void AbbreviationExpansionPredictor::cacheAbbreviationsExpansions()
 {
     cache.clear();

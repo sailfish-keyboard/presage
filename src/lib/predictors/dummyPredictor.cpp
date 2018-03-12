@@ -75,3 +75,9 @@ void DummyPredictor::learn(const std::vector<std::string>& change)
     std::cout << "DummyPredictor::learn() method called" << std::endl;
     std::cout << "DummyPredictor::learn() method exited" << std::endl;
 }
+
+void DummyPredictor::forget(const std::string& word)
+{
+    std::cout << "DummyPredictor::forget() method called" << std::endl;
+    std::cout << "DummyPredictor::forget() method exited" << std::endl;
+}

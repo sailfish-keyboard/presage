@@ -167,8 +167,11 @@ int DatabaseConnector::incrementNgramCount(const Ngram ngram)
     return count;
 }
 
-void DatabaseConnector::removeNgram(const Ngram ngram) const
-{}
+void DatabaseConnector::removeNgram(const Ngram ngram)
+{
+    // invalidate cached sum
+    unigram_counts_sum = -1;
+}
 
 void DatabaseConnector::insertNgram(const Ngram ngram, const int count)
 {
@@ -196,6 +199,27 @@ void DatabaseConnector::updateNgram(const Ngram ngram, const int count)
           << buildWhereClause(ngram) << ";";
 
     executeSql(query.str());
+}
+
+void DatabaseConnector::dropNgramsWithWord(const std::string &word)
+{
+    // invalidate cached sum
+    unigram_counts_sum = -1;
+
+    std::string sanitized = sanitizeString(word);
+    for (size_t table = 1; table <= cardinality; ++table) {
+        std::stringstream delete_clause;
+        delete_clause << "DELETE FROM _" << table << "_gram WHERE ";
+        for (size_t i = 0; i < table; ++i) {
+            if ( i ) {
+              delete_clause << " OR word_" << i << " = '" << sanitized << "'";
+            } else {
+              delete_clause << " word" << " = '" << sanitized << "'";
+            }
+        }
+
+        executeSql( delete_clause.str() );
+    }
 }
 
 std::string DatabaseConnector::buildWhereClause(const Ngram ngram) const

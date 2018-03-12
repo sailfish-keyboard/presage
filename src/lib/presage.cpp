@@ -143,6 +143,12 @@ void Presage::learn(const std::string text) const
 				 // learn to specify offline learning
 }
 
+void Presage::forget(const std::string word) const
+    throw (PresageException)
+{
+    contextTracker->forget(word);
+}
+
 PresageCallback* Presage::callback (PresageCallback* callback)
     throw (PresageException)
 {
@@ -464,6 +470,14 @@ presage_error_code_t presage_learn (presage_t prsg, const char* text)
     presage_exception_handler
     (
 	prsg->presage_object->learn (text);
+    );
+}
+
+presage_error_code_t presage_forget (presage_t prsg, const char* text)
+{
+    presage_exception_handler
+    (
+	prsg->presage_object->forget (text);
     );
 }
 

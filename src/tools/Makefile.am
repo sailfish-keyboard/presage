@@ -27,6 +27,7 @@ noinst_LTLIBRARIES =	libtools.la
 libtools_la_SOURCES =	ngram.cpp ngram.h
 
 bin_PROGRAMS =		presage_demo_text \
+			presage_demo_forget \
 			presage_simulator
 
 if USE_SQLITE
@@ -49,6 +50,9 @@ endif
 
 presage_demo_text_SOURCES = 	presageDemoText.cpp
 presage_demo_text_LDADD = 	../lib/libpresage.la
+
+presage_demo_forget_SOURCES = 	presageDemoForget.cpp
+presage_demo_forget_LDADD = 	../lib/libpresage.la
 
 presage_simulator_SOURCES =	presageSimulator.cpp
 presage_simulator_LDADD =	simulator/libsimulator.la \

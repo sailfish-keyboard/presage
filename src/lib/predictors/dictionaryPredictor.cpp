@@ -105,6 +105,12 @@ void DictionaryPredictor::learn(const std::vector<std::string>& change)
     std::cout << "DictionaryPredictor::learn() method exited" << std::endl;
 }
 
+void DictionaryPredictor::forget(const std::string& word)
+{
+    std::cout << "DictionaryPredictor::forget() method called" << std::endl;
+    std::cout << "DictionaryPredictor::forget() method exited" << std::endl;
+}
+
 void DictionaryPredictor::update (const Observable* var)
 {
     logger << DEBUG << "About to invoke dispatcher: " << var->get_name () << " - " << var->get_value() << endl;

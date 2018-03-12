@@ -24,6 +24,8 @@
 
 #include "smoothedNgramPredictor.h"
 
+#include "../core/utility.h"
+
 #include <sstream>
 #include <algorithm>
 
@@ -506,6 +508,25 @@ void SmoothedNgramPredictor::check_learn_consistency(const Ngram& ngram) const
 	    logger << DEBUG << "consistency adjusted" << endl;
 	}
     }
+}
+
+void SmoothedNgramPredictor::forget(const std::string& word)
+{
+    logger << INFO << "forget(\"" << word << "\")" << endl;
+
+    if (learn_mode) {
+	// learning is turned on
+        db->beginTransaction();
+        db->dropNgramsWithWord(word);
+
+        std::string word_normalized = Utility::strtolower(word);
+        if (word_normalized != word)
+            db->dropNgramsWithWord(word_normalized);
+        
+        db->endTransaction();
+    }
+    
+    logger << DEBUG << "end forget()" << endl;
 }
 
 void SmoothedNgramPredictor::update (const Observable* var)

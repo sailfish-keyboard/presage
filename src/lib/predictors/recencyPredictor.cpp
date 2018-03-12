@@ -126,6 +126,9 @@ Prediction RecencyPredictor::predict (const size_t max, const char** filter) con
 void RecencyPredictor::learn(const std::vector<std::string>& change)
 {}
 
+void RecencyPredictor::forget(const std::string& word)
+{}
+
 void RecencyPredictor::update (const Observable* var)
 {
     logger << DEBUG << "About to invoke dispatcher: " << var->get_name () << " - " << var->get_value() << endl;

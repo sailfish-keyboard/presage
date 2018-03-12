@@ -183,6 +183,19 @@ void ContextTracker::learn(const std::string& text) const
     }
 }
 
+void ContextTracker::forget(const std::string& word) const
+{
+    logger << INFO << "forget(): word: " << word << endl;
+
+    PredictorRegistry::Iterator it = predictorRegistry->iterator();
+    Predictor* predictor = 0;
+
+    while (it.hasNext()) {
+	predictor = it.next();
+	predictor->forget(word);
+    }
+}
+
 std::string ContextTracker::getPrefix() const
 {
     return getToken(0);

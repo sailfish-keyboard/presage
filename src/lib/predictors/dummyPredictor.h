@@ -40,6 +40,8 @@ public:
 
     virtual void learn(const std::vector<std::string>& change);
 
+    virtual void forget(const std::string& word);
+
 private:
 	
 };

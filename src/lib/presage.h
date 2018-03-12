@@ -169,6 +169,17 @@ public:
      */
     void learn(const std::string text) const throw (PresageException);
 
+    /** \brief Forget a word.
+     *
+     * Requests presage to forget a \param word. The active predictors
+     * in presage that are able to learn from text, are also able to
+     * forget the words.
+     *
+     * \param text a text string to learn from.
+     *
+     */
+    void forget(const std::string word) const throw (PresageException);
+
     /** \brief Callback getter/setter.
      *
      * \param callback to be used by presage (pass a null pointer to
@@ -314,6 +325,9 @@ extern "C" {
                                                       presage_prediction_t* result);
     
     presage_error_code_t presage_learn               (presage_t prsg,
+						      const char* text);
+
+    presage_error_code_t presage_forget              (presage_t prsg,
 						      const char* text);
 
     presage_error_code_t presage_completion          (presage_t prsg,
