@@ -4,6 +4,7 @@
  *  ---------------------------------------------------
  *
  *  Copyright (C) 2008  Matteo Vescovi <matteo.vescovi@yahoo.co.uk>
+ *  Copyright (C) 2018  rinigus <rinigus.git@gmail.com>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
