@@ -72,6 +72,8 @@ Prediction DummyPredictor::predict(const size_t max_partial_predictions_size, co
 
 void DummyPredictor::learn(const std::vector<std::string>& change)
 {
-    std::cout << "DummyPredictor::learn() method called" << std::endl;
-    std::cout << "DummyPredictor::learn() method exited" << std::endl;
+}
+
+void DummyPredictor::forget(const std::string& word)
+{
 }

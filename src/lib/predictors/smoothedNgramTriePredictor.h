@@ -47,6 +47,9 @@ public:
   // no-op
   virtual void learn(const std::vector<std::string>& change);
 
+  // no-op
+  virtual void forget(const std::string& word);
+
   virtual void update (const Observable* variable);
 
 protected:

@@ -318,9 +318,11 @@ Prediction SmoothedNgramTriePredictor::predict(const size_t max_partial_predicti
 
 void SmoothedNgramTriePredictor::learn(const std::vector<std::string>& change)
 {
-  logger << INFO << "learn(\"" << ngram_to_string(change) << "\") not implemented for SmoothedNgramTriePredictor" << endl;
 }
 
+void SmoothedNgramTriePredictor::forget(const std::string& word)
+{
+}
 
 void SmoothedNgramTriePredictor::update (const Observable* var)
 {

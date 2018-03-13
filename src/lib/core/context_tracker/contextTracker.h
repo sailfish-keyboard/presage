@@ -197,6 +197,8 @@ public:
      */
     void learn(const std::string& text) const;
 
+    void forget(const std::string& word) const;
+
     virtual void update (const Observable* variable);
 
     void set_logger (const std::string& value);

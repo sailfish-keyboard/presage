@@ -92,7 +92,11 @@ public:
 
     /** Removes the ngram from the database
      */
-    void removeNgram(const Ngram ngram) const;
+    void removeNgram(const Ngram ngram);
+    
+    /** Removes ngrams containing the word from the database
+     */
+    void dropNgramsWithWord(const std::string &word);
 
     /** Marks the beginning of an SQL transaction.
      *

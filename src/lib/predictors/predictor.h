@@ -62,6 +62,8 @@ public:
 
     virtual void learn(const std::vector<std::string>& change) = 0;
 
+    virtual void forget(const std::string& word) = 0;
+
     const std::string getName() const;
     const std::string getShortDescription() const;
     const std::string getLongDescription() const;

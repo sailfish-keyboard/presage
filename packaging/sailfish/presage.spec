@@ -142,6 +142,7 @@ cp -r packaging/sailfish/database_empty %{buildroot}%{_datadir}/presage/
 %doc AUTHORS ChangeLog NEWS README COPYING THANKS TODO
 %{_bindir}/presage_demo
 %{_bindir}/presage_demo_text
+%{_bindir}/presage_demo_forget
 %{_bindir}/presage_simulator
 %{_bindir}/text2ngram
 

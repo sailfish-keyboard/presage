@@ -132,6 +132,11 @@ void DejavuPredictor::learn(const std::vector<std::string>& change)
     }
 }
 
+void DejavuPredictor::forget(const std::string& word)
+{
+    // not implemented
+}
+
 /** Tests two list arguments match.
  *
  * @return true if lists contain the same tokens in the same order,

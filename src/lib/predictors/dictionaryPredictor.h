@@ -46,6 +46,8 @@ public:
 
     virtual void learn (const std::vector<std::string>& change);
 
+    virtual void forget(const std::string& word);
+
     virtual void update (const Observable* variable);
 
     void set_dictionary (const std::string& value);

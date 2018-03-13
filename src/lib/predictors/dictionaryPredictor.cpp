@@ -101,8 +101,10 @@ Prediction DictionaryPredictor::predict(const size_t max_partial_predictions_siz
 
 void DictionaryPredictor::learn(const std::vector<std::string>& change)
 {
-    std::cout << "DictionaryPredictor::learn() method called" << std::endl;
-    std::cout << "DictionaryPredictor::learn() method exited" << std::endl;
+}
+
+void DictionaryPredictor::forget(const std::string& word)
+{
 }
 
 void DictionaryPredictor::update (const Observable* var)
