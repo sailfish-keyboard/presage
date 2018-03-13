@@ -454,8 +454,6 @@ float ARPAPredictor::computeBigramBackoff(int wd1, int wd2) const
 
 void ARPAPredictor::learn(const std::vector<std::string>& change)
 {
-    logger << DEBUG << "learn() method called" << endl;
-    logger << DEBUG << "learn() method exited" << endl;
 }
 
 void ARPAPredictor::forget(const std::string& word)
