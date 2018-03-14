@@ -19,6 +19,8 @@ Main changes:
 * Addition of
   [Hunspell](https://github.com/hunspell)
   Predictor.
+
+* Addition of `forget` word API
   
 * Fixes required to make it work on Sailfish OS (loading empty
   configurations and others)
@@ -85,7 +87,7 @@ used corpus and language.
 As an example script, `utils/process_en.py` is the script used to
 parse English corpus based on [OANC](http://www.anc.org/) and
 [OpenSubtitles](http://www.opensubtitles.org/) dump from
-[OPUS](http://opus.lingfil.uu.se) (described in Jörg Tiedemann, 2012,
+[OPUS](http://opus.lingfil.uu.se) (described in JÃ¶rg Tiedemann, 2012,
 Parallel Data, Tools and Interfaces in OPUS. In Proceedings of the 8th
 International Conference on Language Resources and Evaluation, LREC
 2012). Corpus was generated from OANC text files, OpenSubtitles parsed
