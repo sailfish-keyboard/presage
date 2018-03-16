@@ -113,7 +113,7 @@ Prediction HunspellPredictor::predict(const size_t max_partial_predictions_size,
       {
         logger << DEBUG << prefix << " misspelled" << endl;
 
-        // correct spelling, let's suggest correct words
+        // incorrect spelling, let's suggest correct words
         std::vector<std::string> wlst = hunspell->suggest(prefix);
         double dprob = probability / (wlst.size() + 1);
         double cprob = probability - dprob;
