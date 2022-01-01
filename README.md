@@ -6,7 +6,7 @@ to incorporate into Sailfish OS keyboard as a prediction module.
 This fork should support the same platforms as the upstream. However, it is developed on 
 Linux and may lack testing on other platforms.
 
-All changes introduced in the fork are listed at https://github.com/rinigus/presage/compare/upstream...master
+All changes introduced in the fork are listed at https://github.com/sailfish-keyboard/presage/compare/upstream...master
 
 Main changes:
 

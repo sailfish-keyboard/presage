@@ -16,8 +16,8 @@
 #
 
 Name:           presage
-Version:        0.9.1
-Release:        7.29
+Version:        2.0.0
+Release:        1
 Summary:        Intelligent predictive text entry platform (tools and demos)
 License:        GPL-2.0
 Group:          Applications/Productivity
