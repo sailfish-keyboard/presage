@@ -47,6 +47,14 @@ This package contains the tools required to generate custom statistical data use
 
 This package also contains simple demonstration programs and simulator.
 
+Type: console-application
+Icon: https://raw.githubusercontent.com/sailfish-keyboard/presage/master/resources/presage.png
+Custom:
+  Repo: https://github.com/sailfish-keyboard/presage
+Categories:
+  - Office
+  - Utility
+
 %package -n libpresage-devel
 Summary:        Intelligent predictive text entry platform (development files)
 Group:          Development/Libraries
@@ -57,6 +65,13 @@ Presage is an intelligent predictive text entry platform.
 This package contains development files.
 
 This package contains the header files needed to compile applications or shared objects that use libpresage.
+
+Icon: https://raw.githubusercontent.com/sailfish-keyboard/presage/master/resources/presage.png
+Custom:
+  Repo: https://github.com/sailfish-keyboard/presage
+Categories:
+  - Office
+  - Library
 
 %package -n libpresage1
 Summary:        Intelligent predictive text entry platform (shared library)
@@ -73,6 +88,13 @@ Presage exploits redundant information embedded in natural languages to generate
 
 This package contains the shared library.
 
+Icon: https://raw.githubusercontent.com/sailfish-keyboard/presage/master/resources/presage.png
+Custom:
+  Repo: https://github.com/sailfish-keyboard/presage
+Categories:
+  - Office
+  - Library
+
 %package -n presage-data
 Summary:        Intelligent predictive text entry platform (data files)
 Group:          System/Libraries
@@ -83,6 +105,13 @@ Obsoletes:      libpresage-data < %{version}
 Presage is an intelligent predictive text entry platform.
 
 This package contains the global configuration file needed by the presage.
+
+Icon: https://raw.githubusercontent.com/sailfish-keyboard/presage/master/resources/presage.png
+Custom:
+  Repo: https://github.com/sailfish-keyboard/presage
+Categories:
+  - Office
+  - Library
 
 %package -n libpresage-doc
 Summary:        Intelligent predictive text entry platform (documentation)
@@ -97,6 +126,13 @@ Presage is an intelligent predictive text entry platform.
 This package contains the documentation for libpresage.
 
 Documentation is available in HTML and LaTeX format.
+
+Icon: https://raw.githubusercontent.com/sailfish-keyboard/presage/master/resources/presage.png
+Custom:
+  Repo: https://github.com/sailfish-keyboard/presage
+Categories:
+  - Office
+  - Documentation
 
 %prep
 %setup -q -n %{name}-%{version}
