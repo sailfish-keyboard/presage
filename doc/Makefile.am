@@ -49,7 +49,7 @@ if HAVE_DOXYGEN
 #pkgdata_DATA =	html latex
 install-data-local:
 	$(mkinstalldirs) $(DESTDIR)$(pkgdatadir)/html
-	find html -type f \( -name "*.html" -o -name "*.png" \) \
+	find html -type f \( -name "*.html" -o -name "*.png" -o -name "*.css" \) \
 		-exec $(INSTALL_DATA) {} $(DESTDIR)$(pkgdatadir)/{} \;
 
 all-local:	doxygen.timestamp
