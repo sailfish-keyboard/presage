@@ -173,7 +173,7 @@ int main(int argc, char* argv[])
 	// create tokenizer object and open input file stream
 	std::ifstream infile(argv[i]);
 	ForwardTokenizer tokenizer(infile,
-				   " \f\n\r\t\v",
+				   " \f\n\r\t\v ",
 				   "`~!@#$%^&*()_-+=\\|]}[{'\";:/?.>,<«»");
 	tokenizer.lowercaseMode(lowercase);
 
