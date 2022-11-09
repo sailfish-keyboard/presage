@@ -174,7 +174,7 @@ int main(int argc, char* argv[])
 	std::ifstream infile(argv[i]);
 	ForwardTokenizer tokenizer(infile,
 				   " \f\n\r\t\v",
-				   "`~!@#$%^&*()_-+=\\|]}[{'\";:/?.>,<");
+				   "`~!@#$%^&*()_-+=\\|]}[{'\";:/?.>,<«»");
 	tokenizer.lowercaseMode(lowercase);
 
 	// take care of first N-1 tokens
