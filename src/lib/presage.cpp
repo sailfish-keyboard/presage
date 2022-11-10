@@ -31,7 +31,7 @@
 #include "core/predictorActivator.h"
 
 Presage::Presage (PresageCallback* callback)
-    throw (PresageException)
+    noexcept(false)
 {
     profileManager = new ProfileManager();
     configuration = profileManager->get_configuration();
@@ -42,7 +42,7 @@ Presage::Presage (PresageCallback* callback)
 }
 
 Presage::Presage (PresageCallback* callback, const std::string config_filename)
-    throw (PresageException)
+    noexcept(false)
 {
     profileManager = new ProfileManager(config_filename);
     configuration = profileManager->get_configuration();
@@ -62,7 +62,7 @@ Presage::~Presage()
 }
 
 std::vector<std::string> Presage::predict ()
-    throw (PresageException)
+    noexcept(false)
 {
     std::vector<std::string> result;
 
@@ -88,7 +88,7 @@ std::vector<std::string> Presage::predict ()
 }
 
 std::multimap<double, std::string> Presage::predict (std::vector<std::string> filter)
-    throw (PresageException)
+    noexcept(false)
 {
     std::multimap<double, std::string> result;
 
@@ -137,26 +137,26 @@ std::multimap<double, std::string> Presage::predict (std::vector<std::string> fi
 }
 
 void Presage::learn(const std::string text) const
-    throw (PresageException)
+    noexcept(false)
 {
     contextTracker->learn(text); // TODO: can pass additional param to
 				 // learn to specify offline learning
 }
 
 void Presage::forget(const std::string word) const
-    throw (PresageException)
+    noexcept(false)
 {
     contextTracker->forget(word);
 }
 
 PresageCallback* Presage::callback (PresageCallback* callback)
-    throw (PresageException)
+    noexcept(false)
 {
     return const_cast<PresageCallback*>(contextTracker->callback(callback));
 }
 
 std::string Presage::completion (const std::string str)
-    throw (PresageException)
+    noexcept(false)
 {
     // There are two types of completions: normal and erasing.
     // normal_completion  = prefix + remainder
@@ -204,43 +204,43 @@ std::string Presage::completion (const std::string str)
 }
 
 std::string Presage::context () const
-    throw (PresageException)
+    noexcept(false)
 {
     return contextTracker->getPastStream();
 }
 
 bool Presage::context_change () const
-    throw (PresageException)
+    noexcept(false)
 {
     return contextTracker->contextChange();
 }
 
 std::string Presage::prefix () const
-    throw (PresageException)
+    noexcept(false)
 {
     return contextTracker->getPrefix();
 }
 
 std::string Presage::config (const std::string variable) const
-    throw (PresageException)
+    noexcept(false)
 {
     return configuration->find (variable)->get_value ();
 }
 
 void Presage::config (const std::string variable, const std::string value) const
-    throw (PresageException)
+    noexcept(false)
 {
     configuration->insert (variable, value);
 }
 
 void Presage::save_config () const
-    throw (PresageException)
+    noexcept(false)
 {
     profileManager->save_profile ();
 }
 
 std::string Presage::version () const
-    throw (PresageException)
+    noexcept(false)
 {
     return VERSION;
 }
