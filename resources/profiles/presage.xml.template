@@ -90,7 +90,7 @@
             </DatabaseConnector>
         </DefaultSmoothedNgramPredictor>
         <DefaultSmoothedNgramTriePredictor>
-            <PREDICTOR>SmoothedNgramPredictor</PREDICTOR>
+            <PREDICTOR>SmoothedNgramTriePredictor</PREDICTOR>
             <LOGGER>ERROR</LOGGER>
             <DBFILENAME>::PACKAGEDATADIR::/database_en</DBFILENAME>
             <!-- delta_0, delta_1, ..., delta_{n-1}
