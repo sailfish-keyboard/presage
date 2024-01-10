@@ -207,6 +207,11 @@ AM_CONDITIONAL([USE_SQLITE], [test "x$use_sqlite" = "xyes"])
 dnl ==================
 dnl Checks for MARISA
 dnl ==================
+AC_ARG_ENABLE([marisa],
+        AS_HELP_STRING([--disable-marisa],[disable use of libmarisa (default: enabled)]),
+        [enable_marisa=$enableval],
+        [enable_marisa=yes])
+
 AC_CHECK_HEADERS([marisa.h],
                  [have_marisa_header=true],
                  [AC_MSG_WARN([MARISA header file not found.])],
@@ -216,6 +221,15 @@ if test "x$have_marisa_header" = "xtrue"
 then
 AC_SUBST([MARISA_LIBS], ["-lmarisa"])
 fi
+
+if test "x$enable_marisa" = "xyes" -a "x$have_marisa_header" = "xtrue"
+then
+    use_marisa=yes
+    AC_DEFINE([USE_MARISA], [1], [Define to 1 if you want to use libmarisa])
+else
+    use_marisa=no
+fi
+AM_CONDITIONAL([USE_MARISA], [test "x$use_marisa" = "xyes"])
 
 dnl ==================
 dnl Checks for HUNSPELL
@@ -642,7 +656,8 @@ AC_MSG_RESULT([
 
   Predictors:
 
-    Smoothed n-gram: ............ ${use_sqlite}
+    Smoothed n-gram with SQLite:. ${use_sqlite}
+    Smoothed n-gram with MARISA:. ${use_marisa}
     Recency promotion: .......... yes
     Abbreviation expansion: ..... yes
     Smoothed count: ............. ${use_sqlite}
