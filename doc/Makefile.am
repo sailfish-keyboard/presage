@@ -62,7 +62,7 @@ DISTCLEANFILES =	doxygen.timestamp
 
 distclean-local:
 	rm -rf html latex
-	rm doxygen_sqlite3.db
+	rm -f doxygen_sqlite3.db
 
 uninstall-local:
 	rm -rf $(DESTDIR)$(pkgdatadir)/html $(DESTDIR)$(pkgdatadir)/latex
