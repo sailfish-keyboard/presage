@@ -103,7 +103,6 @@ dnl ====================
 dnl =======================
 dnl Checks for header files
 dnl =======================
-AC_HEADER_STDC
 AC_HEADER_DIRENT
 AC_CHECK_HEADERS([pwd.h])
 
