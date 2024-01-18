@@ -66,6 +66,9 @@ if HAVE_HELP2MAN
 presage_demo_text.1:	presage_demo_text$(EXEEXT) $(top_srcdir)/configure.ac
 	help2man --output=$@ --no-info --name="presage demo program (text)" ./presage_demo_text$(EXEEXT)
 
+presage_demo_forget.1:	presage_demo_forget$(EXEEXT) $(top_srcdir)/configure.ac
+	help2man --output=$@ --no-info --name="presage forget demo program" ./presage_demo_forget$(EXEEXT)
+
 presage_simulator.1:	presage_simulator$(EXEEXT) presageSimulator.cpp $(top_srcdir)/configure.ac
 	help2man --output=$@ --no-info --name="presage simulator program" ./presage_simulator$(EXEEXT)
 
