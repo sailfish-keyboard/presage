@@ -37,11 +37,11 @@ const char* ContextTracker::ONLINE_LEARNING = "Presage.ContextTracker.ONLINE_LEA
 ContextTracker::ContextTracker(Configuration* config,
 			       PredictorRegistry* registry,
 			       PresageCallback* callback,
-			       const char wChars[],
+			       const unsigned char wChars[],
 			       const char tChars[],
 			       const char bChars[],
 			       const char cChars[])
-    : wordChars      (wChars),
+    : wordChars      (reinterpret_cast<const char *>(wChars)),
       separatorChars (tChars),
       blankspaceChars(bChars),
       controlChars   (cChars),

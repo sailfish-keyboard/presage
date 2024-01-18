@@ -30,7 +30,7 @@ CPPUNIT_TEST_SUITE_REGISTRATION( ContextChangeDetectorTest );
 
 void ContextChangeDetectorTest::setUp()
 {
-    detector = new ContextChangeDetector(DEFAULT_WORD_CHARS,
+    detector = new ContextChangeDetector(reinterpret_cast<const char *>(DEFAULT_WORD_CHARS),
 					 DEFAULT_SEPARATOR_CHARS,
 					 DEFAULT_BLANKSPACE_CHARS,
 					 DEFAULT_CONTROL_CHARS,

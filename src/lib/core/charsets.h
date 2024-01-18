@@ -42,7 +42,7 @@ const char PAGE_UP     = 128;
 const char PAGE_DOWN   = 128;
 
 
-const char DEFAULT_WORD_CHARS[]={
+const unsigned char DEFAULT_WORD_CHARS[]={
     'A',
     'B',
     'C',
