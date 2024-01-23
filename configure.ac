@@ -402,6 +402,7 @@ then
 fi
 
 if test "$PYTHON" != : -a \
+	"x$ac_enable_python_binding" = "xyes" -a \
 	"x$have_python_wx" = "xyes" -a \
 	"x$have_python_wx_stc" = "xyes"
 then
