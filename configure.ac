@@ -286,7 +286,7 @@ dnl ======================
 dnl Checks for dbus python
 dnl ======================
 have_dbus_python=no
-if test "$PYTHON" != :
+if test "$PYTHON" != : -a "x$ac_enable_python_binding" = "xyes"
 then
     AC_MSG_CHECKING(for python dbus module)
     $PYTHON -c "import dbus" 2&>/dev/null
