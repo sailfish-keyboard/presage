@@ -660,7 +660,6 @@ AC_MSG_RESULT([
     Smoothed n-gram with MARISA:. ${use_marisa}
     Recency promotion: .......... yes
     Abbreviation expansion: ..... yes
-    Smoothed count: ............. ${use_sqlite}
     Dictionary: ................. yes
     Deja-vu: .................... yes
     ARPA: ....................... yes
