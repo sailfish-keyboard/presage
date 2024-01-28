@@ -157,7 +157,7 @@ public:
     ContextTracker(Configuration* config,
 		   PredictorRegistry* predictorRegistry,
 		   PresageCallback* callback,
-		   const char[]=DEFAULT_WORD_CHARS,
+		   const unsigned char[]=DEFAULT_WORD_CHARS,
                    const char[]=DEFAULT_SEPARATOR_CHARS,
                    const char[]=DEFAULT_BLANKSPACE_CHARS,
                    const char[]=DEFAULT_CONTROL_CHARS );

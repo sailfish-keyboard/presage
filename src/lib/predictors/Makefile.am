@@ -33,12 +33,17 @@ PREDICTORS = \
 	libDejavuPredictor.la \
 	libARPAPredictor.la
 
+DBCONNECTOR = \
+	dbconnector/libdbconnector.la
+
 if USE_SQLITE
 PREDICTORS += \
 	libSmoothedNgramPredictor.la
+endif
 
-DBCONNECTOR = \
-	dbconnector/libdbconnector.la
+if USE_MARISA
+PREDICTORS += \
+	libSmoothedNgramTriePredictor.la
 endif
 
 noinst_LTLIBRARIES = \
@@ -51,8 +56,9 @@ libpredictors_la_LIBADD =	$(PREDICTORS) $(DBCONNECTOR)
 libpredictor_la_SOURCES =	predictor.cpp predictor.h
 
 libSmoothedNgramPredictor_la_SOURCES =	smoothedNgramPredictor.cpp \
-					smoothedNgramPredictor.h   \
-					smoothedNgramTriePredictor.cpp \
+					smoothedNgramPredictor.h
+
+libSmoothedNgramTriePredictor_la_SOURCES = smoothedNgramTriePredictor.cpp \
 					smoothedNgramTriePredictor.h
 
 libAbbreviationExpansionPredictor_la_SOURCES =	abbreviationExpansionPredictor.h   \

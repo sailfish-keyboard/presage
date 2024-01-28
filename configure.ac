@@ -103,7 +103,6 @@ dnl ====================
 dnl =======================
 dnl Checks for header files
 dnl =======================
-AC_HEADER_STDC
 AC_HEADER_DIRENT
 AC_CHECK_HEADERS([pwd.h])
 
@@ -208,6 +207,11 @@ AM_CONDITIONAL([USE_SQLITE], [test "x$use_sqlite" = "xyes"])
 dnl ==================
 dnl Checks for MARISA
 dnl ==================
+AC_ARG_ENABLE([marisa],
+        AS_HELP_STRING([--disable-marisa],[disable use of libmarisa (default: enabled)]),
+        [enable_marisa=$enableval],
+        [enable_marisa=yes])
+
 AC_CHECK_HEADERS([marisa.h],
                  [have_marisa_header=true],
                  [AC_MSG_WARN([MARISA header file not found.])],
@@ -217,6 +221,15 @@ if test "x$have_marisa_header" = "xtrue"
 then
 AC_SUBST([MARISA_LIBS], ["-lmarisa"])
 fi
+
+if test "x$enable_marisa" = "xyes" -a "x$have_marisa_header" = "xtrue"
+then
+    use_marisa=yes
+    AC_DEFINE([USE_MARISA], [1], [Define to 1 if you want to use libmarisa])
+else
+    use_marisa=no
+fi
+AM_CONDITIONAL([USE_MARISA], [test "x$use_marisa" = "xyes"])
 
 dnl ==================
 dnl Checks for HUNSPELL
@@ -256,7 +269,7 @@ AM_PATH_PYTHON([2.0],
                [AC_MSG_WARN([Python not found. Python is required to build presage python binding. Python can be obtained from http://www.python.org])])
 if test "$PYTHON" != :
 then
-    python_include_path=`$PYTHON -c "import distutils.sysconfig; print distutils.sysconfig.get_python_inc();"`
+    python_include_path=`$PYTHON -c "import distutils.sysconfig; print(distutils.sysconfig.get_python_inc());"`
     AC_CHECK_HEADERS([${python_include_path}/Python.h],
                      [have_python_header=true],
                      [AC_MSG_WARN([Python.h header file not found. Python development files are required to build presage python binding. Python can be obtained from http://www.python.org])],
@@ -287,7 +300,7 @@ dnl ======================
 dnl Checks for dbus python
 dnl ======================
 have_dbus_python=no
-if test "$PYTHON" != :
+if test "$PYTHON" != : -a "x$ac_enable_python_binding" = "xyes"
 then
     AC_MSG_CHECKING(for python dbus module)
     $PYTHON -c "import dbus" 2&>/dev/null
@@ -389,6 +402,7 @@ then
 fi
 
 if test "$PYTHON" != : -a \
+	"x$ac_enable_python_binding" = "xyes" -a \
 	"x$have_python_wx" = "xyes" -a \
 	"x$have_python_wx_stc" = "xyes"
 then
@@ -643,10 +657,10 @@ AC_MSG_RESULT([
 
   Predictors:
 
-    Smoothed n-gram: ............ ${use_sqlite}
+    Smoothed n-gram with SQLite:. ${use_sqlite}
+    Smoothed n-gram with MARISA:. ${use_marisa}
     Recency promotion: .......... yes
     Abbreviation expansion: ..... yes
-    Smoothed count: ............. ${use_sqlite}
     Dictionary: ................. yes
     Deja-vu: .................... yes
     ARPA: ....................... yes

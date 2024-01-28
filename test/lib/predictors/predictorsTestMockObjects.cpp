@@ -31,7 +31,7 @@
 ContextTracker::ContextTracker(Configuration* config,
 			       PredictorRegistry* predictorRegistry,
 			       PresageCallback* callback,
-			       const char wc[],
+			       const unsigned char wc[],
 			       const char sc[],
 			       const char bc[],
 			       const char cc[])
