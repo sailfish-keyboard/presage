@@ -73,9 +73,11 @@ presage_simulator.1:	presage_simulator$(EXEEXT) presageSimulator.cpp $(top_srcdi
 	help2man --output=$@ --no-info --name="presage simulator program" ./presage_simulator$(EXEEXT)
 
 dist_man_MANS =		presage_demo_text.1 \
+			presage_demo_forget.1 \
 			presage_simulator.1
 
 DISTCLEANFILES =	presage_demo_text.1 \
+			presage_demo_forget.1 \
 			presage_simulator.1
 
 if USE_SQLITE
