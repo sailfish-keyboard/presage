@@ -22,7 +22,7 @@ dnl 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 dnl Process this file with autoconf to produce a configure script.
 
 
-AC_INIT([presage],[0.9.2~beta],[https://github.com/sailfish-keyboard/presage])
+AC_INIT([presage],[2.0.0],[https://github.com/sailfish-keyboard/presage])
 AM_INIT_AUTOMAKE([1.9 tar-ustar -Wall])
 
 AC_CONFIG_SRCDIR([src/lib/presage.cpp])

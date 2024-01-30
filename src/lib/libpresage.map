@@ -44,7 +44,7 @@ global:
 	presage_learn;
 } PRESAGE_0.8.5;
 
-PRESAGE_0.9.2 {
+PRESAGE_2.0.0 {
 global:
 	extern "C++" {
 		Presage::version*;
