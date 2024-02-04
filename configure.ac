@@ -126,19 +126,12 @@ dnl ==================
 AC_CHECK_LIB([tinyxml],
              [main],
              [have_tinyxml_library=true],
-	     [AC_MSG_WARN([tinyxml library not found. Embedded tinyxml library will be built.])])
+             [AC_MSG_ERROR([tinyxml library not found.])])
 AC_CHECK_HEADERS([tinyxml.h],
                  [have_tinyxml_header=true],
-                 [AC_MSG_WARN([tinyxml library not found. Embedded tinyxml library will be built.])],
+                 [AC_MSG_ERROR([tinyxml library not found.])],
                  [])
-if test "x$have_tinyxml_library" != "xtrue" -o "x$have_tinyxml_header" != "xtrue"
-then
-    build_tinyxml=yes
-else
-    build_tinyxml=no
-    AC_DEFINE([TIXML_USE_STL], [1], [Define to 1 to use STL string in TinyXML])
-fi
-AM_CONDITIONAL([BUILD_TINYXML], [test "x$build_tinyxml" = "xyes"])
+AC_DEFINE([TIXML_USE_STL], [1], [Define to 1 to use STL string in TinyXML])
 
 
 dnl =================
@@ -577,7 +570,6 @@ AC_CONFIG_FILES([
 	src/lib/core/Makefile
 	src/lib/core/tokenizer/Makefile
 	src/lib/core/context_tracker/Makefile
-	src/lib/tinyxml/Makefile
 	src/lib/predictors/Makefile
 	src/lib/predictors/dbconnector/Makefile
 	src/tools/Makefile

@@ -21,11 +21,7 @@
 
 ## Process this file with automake to produce Makefile.in
 
-if BUILD_TINYXML
-MAYBE_TINYXML =	tinyxml
-endif
-
-SUBDIRS =	$(MAYBE_TINYXML) core predictors
+SUBDIRS = 			core predictors
 
 include_HEADERS =		presage.h \
 				presageException.h \
@@ -38,18 +34,12 @@ libpresage_la_SOURCES = 	presage.cpp \
 				presageCallback.h \
 				libpresage.map
 libpresage_la_LIBADD =		core/libcore.la \
-				predictors/libpredictors.la
+				predictors/libpredictors.la \
+				-ltinyxml
 libpresage_la_LDFLAGS =		-no-undefined \
 				-version-info 2:1:1
 if HAVE_LD_WITH_VERSION_SCRIPT
 libpresage_la_LDFLAGS +=	-Wl,--version-script,$(srcdir)/libpresage.map
-endif
-
-if BUILD_TINYXML
-libpresage_la_CPPFLAGS =	-I$(top_srcdir)/src/lib/tinyxml
-libpresage_la_LIBADD +=		tinyxml/libtinyxml.la
-else
-libpresage_la_LIBADD +=		-ltinyxml
 endif
 
 EXTRA_DIST =	libpresage.map
