@@ -57,13 +57,7 @@ libcoretest_la_SOURCES =
 libcoretest_la_LIBADD = \
 	../common/libcommon.la \
 	$(top_builddir)/src/lib/core/libcore.la \
-	$(top_builddir)/src/lib/predictors/libpredictors.la
-
-if BUILD_TINYXML
-coreTestRunner_CPPFLAGS +=	-I$(top_srcdir)/src/lib/tinyxml
-libcoretest_la_LIBADD +=	$(top_builddir)/src/lib/tinyxml/libtinyxml.la
-else
-libcoretest_la_LIBADD +=	-ltinyxml
-endif
+	$(top_builddir)/src/lib/predictors/libpredictors.la \
+	-ltinyxml
 
 endif

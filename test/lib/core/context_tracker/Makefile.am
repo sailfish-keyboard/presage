@@ -46,14 +46,7 @@ libcontexttrackertest_la_SOURCES =
 libcontexttrackertest_la_LIBADD = \
 	../../common/libcommon.la \
 	$(top_builddir)/src/lib/core/libcore.la \
-	$(top_builddir)/src/lib/predictors/libpredictors.la
-
-
-if BUILD_TINYXML
-contextTrackerTestRunner_CPPFLAGS +=	-I$(top_srcdir)/src/lib/tinyxml
-libcontexttrackertest_la_LIBADD +=	$(top_builddir)/src/lib/tinyxml/libtinyxml.la
-else
-libcontexttrackertest_la_LIBADD +=	-ltinyxml
-endif
+	$(top_builddir)/src/lib/predictors/libpredictors.la \
+	-ltinyxml
 
 endif

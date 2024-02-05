@@ -78,7 +78,3 @@ libcore_la_LIBADD =	\
 	context_tracker/libcontexttracker.la
 
 libcore_la_CPPFLAGS =	-I$(top_srcdir)/src/lib
-
-if BUILD_TINYXML
-libcore_la_CPPFLAGS +=	-I$(top_srcdir)/src/lib/tinyxml
-endif
