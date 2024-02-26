@@ -25,6 +25,9 @@ dnl Process this file with autoconf to produce a configure script.
 AC_INIT([presage],[2.0.0],[https://github.com/sailfish-keyboard/presage])
 AM_INIT_AUTOMAKE([1.9 tar-ustar -Wall])
 
+dnl Define install directory for pkg-config files
+PKG_INSTALLDIR
+
 AC_CONFIG_SRCDIR([src/lib/presage.cpp])
 AC_CONFIG_HEADERS([config.h:config.hin])
 AC_CONFIG_MACRO_DIR([m4])
@@ -567,6 +570,7 @@ AC_CONFIG_FILES([
 	Makefile
 	src/Makefile
 	src/lib/Makefile
+	src/lib/presage.pc
 	src/lib/core/Makefile
 	src/lib/core/tokenizer/Makefile
 	src/lib/core/context_tracker/Makefile

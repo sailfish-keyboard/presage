@@ -1,0 +1,12 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: presage
+Description: Predictive text entry system
+URL: https://github.com/sailfish-keyboard/presage
+Version: @VERSION@
+Requires:
+Libs: -L${libdir} -lpresage
+Cflags: -I${includedir}
