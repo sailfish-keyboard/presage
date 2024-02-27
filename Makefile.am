@@ -63,6 +63,10 @@ dirs.h:	Makefile
 
 EXTRA_DIST =	FAQ
 
+# Install the pkg-config file; the directory is set using
+# PKG_INSTALLDIR in configure.ac.
+pkgconfig_DATA = src/lib/presage.pc
+
 # Ensure local m4 macros are included during autoreconf and automatic
 # aclocal.m4 remaking
 ACLOCAL_AMFLAGS = -I m4
