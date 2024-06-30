@@ -134,7 +134,6 @@ AC_CHECK_HEADERS([tinyxml2.h],
                  [have_tinyxml2_header=true],
                  [AC_MSG_ERROR([tinyxml2 library not found.])],
                  [])
-# AC_DEFINE([TIXML_USE_STL], [1], [Define to 1 to use STL string in TinyXML])
 
 
 dnl =================
@@ -236,9 +235,14 @@ PKG_CHECK_MODULES([HUNSPELL], [hunspell >= 1.5.1])
 dnl ==================
 dnl Checks for CppUnit
 dnl ==================
-AM_PATH_CPPUNIT([1.9.6],
-                [],
-                [AC_MSG_WARN([CppUnit not found. Unit tests will not be built. CppUnit can be obtained from http://cppunit.sourceforge.net.])])
+AC_ARG_ENABLE([cppunit],
+        AS_HELP_STRING([--enable-cppunit],[enable CppUnit tests (default: disabled)]),
+        [enable_cppunit=$enableval],
+        [enable_cppunit=no])
+if test "x$enable_cppunit" = "xyes"
+then
+PKG_CHECK_MODULES([CPPUNIT], [cppunit >= 1.9.5])
+fi
 AM_CONDITIONAL([HAVE_CPPUNIT], [test "$CPPUNIT_LIBS"])
 
 
