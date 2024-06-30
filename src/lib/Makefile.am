@@ -35,7 +35,7 @@ libpresage_la_SOURCES = 	presage.cpp \
 				libpresage.map
 libpresage_la_LIBADD =		core/libcore.la \
 				predictors/libpredictors.la \
-				-ltinyxml
+				-ltinyxml2
 libpresage_la_LDFLAGS =		-no-undefined \
 				-version-info 2:1:1
 if HAVE_LD_WITH_VERSION_SCRIPT

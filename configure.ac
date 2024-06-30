@@ -123,18 +123,18 @@ AC_CHECK_HEADERS([curses.h],
 AM_CONDITIONAL([HAVE_CURSES], [test "x$have_curses_library" = "xtrue" -a "x$have_curses_header" = "xtrue"])
 
 
-dnl ==================
-dnl Checks for tinyxml
-dnl ==================
-AC_CHECK_LIB([tinyxml],
+dnl ===================
+dnl Checks for tinyxml2
+dnl ===================
+AC_CHECK_LIB([tinyxml2],
              [main],
-             [have_tinyxml_library=true],
-             [AC_MSG_ERROR([tinyxml library not found.])])
-AC_CHECK_HEADERS([tinyxml.h],
-                 [have_tinyxml_header=true],
-                 [AC_MSG_ERROR([tinyxml library not found.])],
+             [have_tinyxml2_library=true],
+             [AC_MSG_ERROR([tinyxml2 library not found.])])
+AC_CHECK_HEADERS([tinyxml2.h],
+                 [have_tinyxml2_header=true],
+                 [AC_MSG_ERROR([tinyxml2 library not found.])],
                  [])
-AC_DEFINE([TIXML_USE_STL], [1], [Define to 1 to use STL string in TinyXML])
+# AC_DEFINE([TIXML_USE_STL], [1], [Define to 1 to use STL string in TinyXML])
 
 
 dnl =================
