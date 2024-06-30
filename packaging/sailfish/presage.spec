@@ -58,6 +58,7 @@ Categories:
 %package -n libpresage-devel
 Summary:        Intelligent predictive text entry platform (development files)
 Group:          Development/Libraries
+Requires:       pkgconfig
 
 %description -n libpresage-devel
 Presage is an intelligent predictive text entry platform.
@@ -195,6 +196,7 @@ cp -r packaging/sailfish/database_empty %{buildroot}%{_datadir}/presage/
 %{_includedir}/presage.h
 %{_libdir}/libpresage.a
 %{_libdir}/libpresage.la
+%{_libdir}/pkgconfig/presage.pc
 
 
 %files -n presage-data
