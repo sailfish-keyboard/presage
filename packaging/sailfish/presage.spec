@@ -37,6 +37,7 @@ BuildRequires:  libmarisa-devel
 BuildRequires:  libmarisa
 BuildRequires:  hunspell-devel >= 1.5.1
 BuildRequires:  hunspell >= 1.5.1
+BuildRequires:  pkgconfig(tinyxml2)
 BuildRoot:      %{_tmppath}/%{name}-%{version}-root
 Requires:       libpresage1
 
