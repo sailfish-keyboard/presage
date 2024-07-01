@@ -37,6 +37,7 @@ BuildRequires:  libmarisa-devel
 BuildRequires:  libmarisa
 BuildRequires:  hunspell-devel >= 1.5.1
 BuildRequires:  hunspell >= 1.5.1
+BuildRequires:  pkgconfig(tinyxml2)
 BuildRoot:      %{_tmppath}/%{name}-%{version}-root
 Requires:       libpresage1
 
@@ -213,6 +214,7 @@ cp -r packaging/sailfish/database_empty %{buildroot}%{_datadir}/presage/
 %defattr(-,root,root)
 %{_datadir}/presage/getting_started.txt
 %{_mandir}/man1/presage_demo.1.gz
+%{_mandir}/man1/presage_demo_forget.1.gz
 %{_mandir}/man1/presage_demo_text.1.gz
 %{_mandir}/man1/presage_simulator.1.gz
 %{_mandir}/man1/text2ngram.1.gz

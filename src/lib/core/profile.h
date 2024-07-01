@@ -27,7 +27,7 @@
 
 #include "config.h"
 
-#include <tinyxml.h>
+#include <tinyxml2.h>
 
 #include <vector>
 #include <string>
@@ -93,10 +93,10 @@ public:
     };
 
 protected:
-    void init_configuration(Configuration* config, TiXmlDocument* node);
-    void visit_node(Configuration* config, TiXmlNode* node, std::vector<std::string> variable);
+    void init_configuration(Configuration* config, tinyxml2::XMLDocument* node);
+    void visit_node(Configuration* config, tinyxml2::XMLNode* node, std::vector<std::string> variable);
 
-    TiXmlDocument* xmlProfileDoc;
+    tinyxml2::XMLDocument* xmlProfileDoc;
     std::string xml_filename;
     bool xml_profile_read_ok;
 };

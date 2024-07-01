@@ -58,6 +58,6 @@ libcoretest_la_LIBADD = \
 	../common/libcommon.la \
 	$(top_builddir)/src/lib/core/libcore.la \
 	$(top_builddir)/src/lib/predictors/libpredictors.la \
-	-ltinyxml
+	-ltinyxml2
 
 endif
