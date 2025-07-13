@@ -161,6 +161,8 @@ make install DESTDIR=%{buildroot}
 %{__rm} %{buildroot}%{_datadir}/presage/presage.xpm
 %{__rm} %{buildroot}%{_datadir}/presage/python_binding.txt
 
+%{__rm} %{buildroot}%{_libdir}/libpresage.la || true
+
 # # create empty database used in the default configuration
 # echo "CREATE TABLE _1_gram (word TEXT, count INTEGER, UNIQUE(word) );" | sqlite3 %{buildroot}%{_datadir}/presage/database_empty.db
 # echo "CREATE TABLE _2_gram (word_1 TEXT, word TEXT, count INTEGER, UNIQUE(word_1, word) );" | sqlite3 %{buildroot}%{_datadir}/presage/database_empty.db
@@ -196,7 +198,6 @@ cp -r packaging/sailfish/database_empty %{buildroot}%{_datadir}/presage/
 %{_includedir}/presageException.h
 %{_includedir}/presage.h
 %{_libdir}/libpresage.a
-%{_libdir}/libpresage.la
 %{_libdir}/pkgconfig/presage.pc
 
 
